@@ -59,11 +59,7 @@ const { title, description, image = "/og-image.png" } = Astro.props;
 				<nav class="container mx-auto px-4 py-4">
 					<div class="flex items-center justify-between">
 						<div class="flex items-center space-x-2">
-							<div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-lg flex items-center justify-center">
-								<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-								</svg>
-							</div>
+							<img src="/favicon.svg" alt="bit Tecnologies" class="w-8 h-8" />
 							<span class="text-xl font-bold bg-gradient-to-r from-blue-500 to-emerald-500 bg-clip-text text-transparent">
 								bit Tecnologies
 							</span>
@@ -101,7 +97,10 @@ const { title, description, image = "/og-image.png" } = Astro.props;
 				<div class="container mx-auto px-4 py-8">
 					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 						<div>
-							<h3 class="text-lg font-semibold mb-4 text-blue-400">bit Tecnologies</h3>
+							<div class="flex items-center space-x-2 mb-4">
+								<img src="/favicon.svg" alt="bit Tecnologies" class="w-6 h-6" />
+								<h3 class="text-lg font-semibold text-blue-400">bit Tecnologies</h3>
+							</div>
 							<p class="text-slate-400 text-sm">
 								Создаем нативные Android приложения с высокой производительностью и заботой о пользователях.
 							</p>

@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'bit Store — Магазин цифровых товаров';
+const description = 'bit Store — нативный магазин цифровых товаров для Android с акцентом на российский рынок. Безопасные покупки и локальная интеграция.';
+const image = '/og-bit-hub.png';
+---
+
+<Layout title={title} description={description} image={image}>
+	<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+		<div class="container mx-auto px-4 py-16 md:py-24">
+			<div class="max-w-4xl mx-auto">
+				<!-- App Header -->
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl mb-6 shadow-lg shadow-purple-500/25">
+						<svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+						</svg>
+					</div>
+					<h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+						bit Store
+					</h1>
+					<p class="text-lg md:text-xl text-slate-300 mb-4">
+						Магазин цифровых товаров с фокусом на российский рынок
+					</p>
+					<div class="flex items-center justify-center space-x-4 mb-6">
+						<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-sm rounded-full">In Development</span>
+						<span class="text-slate-400">•</span>
+						<span class="text-slate-400">Android 12+</span>
+						<span class="text-slate-400">•</span>
+						<span class="text-slate-400">~5 МБ</span>
+					</div>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+						<button disabled class="inline-flex items-center space-x-2 px-8 py-4 bg-slate-700 text-slate-400 font-semibold rounded-lg cursor-not-allowed opacity-50">
+							<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+							</svg>
+							<span>Скоро будет доступно</span>
+						</button>
+						<a href="#notify" class="inline-flex items-center space-x-2 px-8 py-4 border border-purple-500 text-purple-400 font-semibold rounded-lg hover:bg-purple-500/10 transition-all duration-200">
+							<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M18,16V12A6,6 0 0,0 12,6A6,6 0 0,0 6,12V16H4V18H20V16H18M12,22A2,2 0 0,0 14,20H10A2,2 0 0,0 12,22Z"/>
+							</svg>
+							<span>Уведомить о выходе</span>
+						</a>
+					</div>
+				</div>
+
+				<!-- Features -->
+				<div class="glass-effect rounded-xl p-8 mb-8">
+					<h2 class="text-2xl font-bold mb-6 text-white text-center">Возможности приложения</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div class="flex items-start space-x-3">
+							<svg class="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+							</svg>
+							<div>
+								<h3 class="text-lg font-semibold text-white mb-1">Российские платежи</h3>
+								<p class="text-slate-400 text-sm">Поддержка СБП, Mir, и других российских платежных систем</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<svg class="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+							</svg>
+							<div>
+								<h3 class="text-lg font-semibold text-white mb-1">Локальный контент</h3>
+								<p class="text-slate-400 text-sm">Акцент на российские приложения, игры и цифровые товары</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<svg class="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+							</svg>
+							<div>
+								<h3 class="text-lg font-semibold text-white mb-1">Нативная интеграция</h3>
+								<p class="text-slate-400 text-sm">Глубокая интеграция с Android для удобного использования</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<svg class="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+							</svg>
+							<div>
+								<h3 class="text-lg font-semibold text-white mb-1">Без рекламы</h3>
+								<p class="text-slate-400 text-sm">Чистый интерфейс без навязчивой рекламы и telemetry</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Categories -->
+				<div class="glass-effect rounded-xl p-8 mb-8">
+					<h2 class="text-2xl font-bold mb-6 text-white text-center">Категории товаров</h2>
+					<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+						<div class="bg-slate-800/50 rounded-lg p-4 text-center hover:bg-slate-700/50 transition-colors">
+							<svg class="w-8 h-8 text-purple-400 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L5,8.09V15.91L12,19.85L19,15.91V8.09L12,4.15Z"/>
+							</svg>
+							<p class="text-slate-300 text-sm">Игры</p>
+						</div>
+						<div class="bg-slate-800/50 rounded-lg p-4 text-center hover:bg-slate-700/50 transition-colors">
+							<svg class="w-8 h-8 text-pink-400 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+							</svg>
+							<p class="text-slate-300 text-sm">Приложения</p>
+						</div>
+						<div class="bg-slate-800/50 rounded-lg p-4 text-center hover:bg-slate-700/50 transition-colors">
+							<svg class="w-8 h-8 text-blue-400 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12,3V12.26C11.5,12.09 11,12 10.5,12C8,12 6,14 6,16.5C6,19 8,21 10.5,21C13,21 15,19 15,16.5V6H19V3H12Z"/>
+							</svg>
+							<p class="text-slate-300 text-sm">Музыка</p>
+						</div>
+						<div class="bg-slate-800/50 rounded-lg p-4 text-center hover:bg-slate-700/50 transition-colors">
+							<svg class="w-8 h-8 text-emerald-400 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M18,4L20,8H17L15,4H13L15,8H12L10,4H8L10,8H7L5,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V4H18Z"/>
+							</svg>
+							<p class="text-slate-300 text-sm">Фильмы</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Roadmap -->
+				<div class="glass-effect rounded-xl p-8 mb-8">
+					<h2 class="text-2xl font-bold mb-6 text-white text-center">Дорожная карта разработки</h2>
+					<div class="space-y-4">
+						<div class="flex items-start space-x-3">
+							<div class="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+								<svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-white">Q1 2026 - Базовый функционал</h3>
+								<p class="text-slate-400 text-sm">Каталог приложений, поиск, базовые покупки</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<div class="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+								<div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-white">Q2 2026 - Платежи</h3>
+								<p class="text-slate-400 text-sm">Интеграция с СБП, Mir, и другими российскими системами</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<div class="w-8 h-8 bg-slate-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+								<div class="w-2 h-2 bg-slate-400 rounded-full"></div>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-white">Q3 2026 - Контент</h3>
+								<p class="text-slate-400 text-sm">Расширение каталога, игры, музыка, видео</p>
+							</div>
+						</div>
+						<div class="flex items-start space-x-3">
+							<div class="w-8 h-8 bg-slate-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+								<div class="w-2 h-2 bg-slate-400 rounded-full"></div>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-white">Q4 2026 - Социальные функции</h3>
+								<p class="text-slate-400 text-sm">Отзывы, рейтинги, рекомендации</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Notify Form -->
+				<div id="notify" class="glass-effect rounded-xl p-8 mb-8">
+					<h2 class="text-2xl font-bold mb-6 text-white text-center">Уведомить о выходе</h2>
+					<p class="text-slate-400 text-center mb-6">
+						Оставьте ваш email, и мы сообщим о запуске приложения
+					</p>
+					<div class="max-w-md mx-auto">
+						<div class="flex flex-col sm:flex-row gap-3">
+							<input 
+								type="email" 
+								placeholder="your@email.com" 
+								class="flex-1 px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+							>
+							<button class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-200">
+								Подписаться
+							</button>
+						</div>
+						<p class="text-slate-500 text-xs text-center mt-3">
+							Никакого спама. Только уведомления о запуске.
+						</p>
+					</div>
+				</div>
+
+				<!-- Navigation -->
+				<div class="text-center">
+					<a href="/" class="inline-flex items-center space-x-2 px-6 py-3 border border-slate-600 text-slate-300 font-semibold rounded-lg hover:bg-slate-800 hover:text-white transition-all duration-200 mr-4">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+						</svg>
+						<span>Вернуться на главную</span>
+					</a>
+					<a href="/bit-hub" class="inline-flex items-center space-x-2 px-6 py-3 border border-slate-600 text-slate-300 font-semibold rounded-lg hover:bg-slate-800 hover:text-white transition-all duration-200">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+						</svg>
+						<span>bit Hub</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>

@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'О компании — bit Tecnologies';
+const description = 'Узнайте больше о bit Tecnologies — команде, создающей нативные Android приложения с фокусом на производительность и приватность.';
+const image = '/og-bit-hub.png';
+---
+
+<Layout title={title} description={description} image={image}>
+	<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+		<div class="container mx-auto px-4 py-16 md:py-24">
+			<div class="max-w-4xl mx-auto">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-2xl mb-6 shadow-lg shadow-blue-500/25">
+						<svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+						</svg>
+					</div>
+					<h1 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-emerald-500 bg-clip-text text-transparent">
+						О bit Tecnologies
+					</h1>
+					<p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+						Создаем нативные Android приложения с высокой производительностью и заботой о пользователях
+					</p>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+					<div class="glass-effect rounded-xl p-6 hover:bg-slate-800/70 transition-all duration-300">
+						<div class="flex items-center space-x-3 mb-4">
+							<svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+							</svg>
+							<h3 class="text-xl font-semibold text-white">Наша миссия</h3>
+						</div>
+						<p class="text-slate-300 leading-relaxed">
+							Разрабатывать легкие, быстрые и безопасные Android приложения без лишних зависимостей и telemetry. 
+							Мы верим в право пользователей на приватность и контроль над своими данными.
+						</p>
+					</div>
+
+					<div class="glass-effect rounded-xl p-6 hover:bg-slate-800/70 transition-all duration-300">
+						<div class="flex items-center space-x-3 mb-4">
+							<svg class="w-8 h-8 text-emerald-500" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M9,11H7V13H9V11M13,11H11V13H13V11M17,11H15V13H17V11M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V9H19V20Z"/>
+							</svg>
+							<h3 class="text-xl font-semibold text-white">Наши ценности</h3>
+						</div>
+						<ul class="space-y-2 text-slate-300">
+							<li class="flex items-center space-x-2">
+								<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+								<span>Нативная производительность</span>
+							</li>
+							<li class="flex items-center space-x-2">
+								<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+								<span>Приватность по умолчанию</span>
+							</li>
+							<li class="flex items-center space-x-2">
+								<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+								<span>Открытый исходный код</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="glass-effect rounded-xl p-8 mb-12">
+					<h2 class="text-2xl font-bold mb-6 text-white text-center">Технологии и подход</h2>
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+						<div class="text-center">
+							<div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+								<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+								</svg>
+							</div>
+							<h3 class="text-lg font-semibold text-white mb-2">Kotlin & Java</h3>
+							<p class="text-slate-400 text-sm">Нативная разработка на официальных языках Android</p>
+						</div>
+						<div class="text-center">
+							<div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+								<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+								</svg>
+							</div>
+							<h3 class="text-lg font-semibold text-white mb-2">Jetpack Compose</h3>
+							<p class="text-slate-400 text-sm">Современный UI toolkit для декларативных интерфейсов</p>
+						</div>
+						<div class="text-center">
+							<div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+								<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+								</svg>
+							</div>
+							<h3 class="text-lg font-semibold text-white mb-2">Material Design 3</h3>
+							<p class="text-slate-400 text-sm">Современный дизайн с адаптивной темизацией</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="text-center">
+					<a href="/" class="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-emerald-600 transition-all duration-200">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+						</svg>
+						<span>Вернуться на главную</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>

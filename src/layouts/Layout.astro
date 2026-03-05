@@ -16,6 +16,17 @@ const { title, description, image = "/og-image.png" } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 
+		<!-- Prevent scroll restoration -->
+		<script>
+			if ('scrollRestoration' in history) {
+				history.scrollRestoration = 'manual';
+			}
+			// Ensure page starts at top
+			window.addEventListener('beforeunload', function() {
+				window.scrollTo(0, 0);
+			});
+		</script>
+
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
@@ -128,6 +139,22 @@ const { title, description, image = "/og-image.png" } = Astro.props;
 		</div>
 
 		<script>
+			// Ensure page starts at top on load
+			window.addEventListener('load', function() {
+				window.scrollTo(0, 0);
+				document.documentElement.scrollTop = 0;
+				document.body.scrollTop = 0;
+			});
+
+			// Also check immediately
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', function() {
+					window.scrollTo(0, 0);
+				});
+			} else {
+				window.scrollTo(0, 0);
+			}
+
 			function toggleMobileMenu() {
 				const menu = document.getElementById('mobile-menu');
 				menu.classList.toggle('hidden');

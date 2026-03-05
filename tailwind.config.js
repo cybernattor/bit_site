@@ -4,7 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        'sans': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        'display': ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'Consolas', 'Monaco', 'monospace'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

@@ -4,9 +4,22 @@ import Button from '../components/Button.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import { fetchLatestRelease } from '../utils/github';
 
-const title = 'bit Hub — Альтернатива F-Droid';
-const description = 'bit Hub — нативный магазин приложений для Android с фокусом на приватность и производительность. Альтернатива F-Droid с минималистичным дизайном.';
+const title = 'bit Hub — Нативный клиент для GitHub релизов';
+const description = 'bit Hub дает вам доступ к открытым Android-приложениям без ограничений. Нативное приложение на Jetpack Compose.';
 const image = '/og-bit-hub.png';
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "SoftwareApplication",
+	"name": "bit Hub",
+	"operatingSystem": "Android",
+	"applicationCategory": "DeveloperApplication",
+	"offers": {
+		"@type": "Offer",
+		"price": "0",
+		"priceCurrency": "USD"
+	}
+};
 
 // Fetch release info at build time
 const release = await fetchLatestRelease('cybernattor/bit-hub');

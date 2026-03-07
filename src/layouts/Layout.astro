@@ -7,9 +7,23 @@ export interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	schema?: Record<string, any>;
 }
 
-const { title, description, image = "/og-image.png" } = Astro.props;
+const { title, description, image = "/og-image.png", schema } = Astro.props;
+
+const defaultSchema = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	"name": "bit Tecnologies",
+	"url": "https://cybernattor.github.io", // Using github pages or custom domain as reference
+	"logo": "https://cybernattor.github.io/favicon.svg",
+	"sameAs": [
+		"https://github.com/cybernattor"
+	]
+};
+
+const jsonLd = schema || defaultSchema;
 ---
 
 <!doctype html>
@@ -25,18 +39,7 @@ const { title, description, image = "/og-image.png" } = Astro.props;
 		<meta name="description" content={description} />
 
 		<!-- JSON-LD Schema -->
-		<script type="application/ld+json" set:html={JSON.stringify({
-			"@context": "https://schema.org",
-			"@type": "SoftwareApplication",
-			"name": "bit Hub",
-			"operatingSystem": "Android",
-			"applicationCategory": "DeveloperApplication",
-			"offers": {
-				"@type": "Offer",
-				"price": "0",
-				"priceCurrency": "USD"
-			}
-		})} />
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
 		<!-- Open Graph Tags -->
 		<meta property="og:title" content={title} />

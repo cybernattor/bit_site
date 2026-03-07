@@ -4,11 +4,18 @@ import Button from '../components/Button.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 
 const title = 'О компании — bit Tecnologies';
-const description = 'Узнайте больше о bit Tecnologies — команде, создающей нативные Android приложения с фокусом на производительность и приватность.';
+const description = 'Узнайте больше о bit Tecnologies. Наша миссия — создание качественных, нативных и приватных приложений для Android.';
 const image = '/og-bit-hub.png';
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "AboutPage",
+	"name": title,
+	"description": description
+};
 ---
 
-<Layout title={title} description={description} image={image}>
+<Layout title={title} description={description} schema={schema} image={image}>
 	<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
 		<div class="container mx-auto px-4 py-16 md:py-24">
 			<div class="max-w-4xl mx-auto z-10 relative">

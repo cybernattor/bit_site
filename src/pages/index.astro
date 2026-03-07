@@ -1,15 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Button from '../components/Button.astro';
 import AppCard from '../components/AppCard.astro';
+import Button from '../components/Button.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 
-const title = 'bit Tecnologies — Нативные Android приложения';
-const description = 'bit Tecnologies создает высокопроизводительные Android приложения. bit Hub — альтернатива F-Droid с нативной разработкой и оптимизацией.';
-const image = '/og-bit-hub.png';
+const title = 'bit Tecnologies — Экосистема удобных приложений';
+const description = 'bit Tecnologies разрабатывает нативные, быстрые и приватные приложения для Android. Никакой телеметрии и рекламы.';
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": "bit Tecnologies",
+	"url": "https://cybernattor.github.io",
+	"description": description
+};
 ---
 
-<Layout title={title} description={description} image={image}>
+<Layout title={title} description={description} schema={schema}>
+
+  <!-- Redirect snippet for new un-preferenced english users -->
+  <script is:inline>
+    // Run immediately before page paints
+    (function () {
+      const storedLang = localStorage.getItem('user-lang');
+      
+      // If no stored pref and they are explicitly on root (Russian)
+      if (!storedLang && window.location.pathname === '/') {
+        // Check browser language
+        const browserLang = navigator.language || navigator.userLanguage;
+        
+        // If English, redirect to /en/
+        if (browserLang.toLowerCase().startsWith('en')) {
+          localStorage.setItem('user-lang', 'en');
+          window.location.replace('/en/');
+        } else {
+          localStorage.setItem('user-lang', 'ru');
+        }
+      }
+    })();
+  </script>
+
 	<!-- Hero Section -->
 	<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
 		<div class="container mx-auto px-4 py-16 md:py-24">

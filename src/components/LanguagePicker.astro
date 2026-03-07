@@ -1,0 +1,81 @@
+---
+import { getLangFromUrl, translatePath } from '../i18n/utils';
+import { ui } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+
+// A simple utility to get the opposite language
+const oppositeLang = lang === 'ru' ? 'en' : 'ru';
+const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
+---
+
+<div class="relative inline-block text-left group">
+  <button 
+    type="button" 
+    class="inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200" 
+    id="lang-menu-button" 
+    aria-expanded="false" 
+    aria-haspopup="true"
+  >
+    <span class="sr-only">Выбрать язык / Choose Language</span>
+    <span class="flex items-center space-x-1 font-medium text-sm">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+      </svg>
+      <span class="uppercase">{lang}</span>
+    </span>
+  </button>
+
+  <div 
+    class="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 dark:divide-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 transform pointer-events-none group-hover:pointer-events-auto"
+    role="menu" 
+    aria-orientation="vertical" 
+    aria-labelledby="lang-menu-button" 
+    tabindex="-1"
+  >
+    <div class="py-1" role="none">
+      <a 
+        href={lang === 'ru' ? '#' : translatePath(Astro.url)(currentPath, 'ru')}
+        class={`block px-4 py-2 text-sm transition-colors ${lang === 'ru' ? 'bg-slate-100 dark:bg-slate-700 text-purple-600 dark:text-purple-400 font-semibold cursor-default' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'}`}
+        role="menuitem" 
+        tabindex="-1"
+        id="lang-ru"
+        data-lang="ru"
+      >
+        RU
+      </a>
+      <a 
+        href={lang === 'en' ? '#' : translatePath(Astro.url)(currentPath, 'en')}
+        class={`block px-4 py-2 text-sm transition-colors ${lang === 'en' ? 'bg-slate-100 dark:bg-slate-700 text-purple-600 dark:text-purple-400 font-semibold cursor-default' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'}`}
+        role="menuitem" 
+        tabindex="-1"
+        id="lang-en"
+        data-lang="en"
+      >
+        EN
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Persist language selection in localStorage
+  function setupLangLinks() {
+    const langLinks = document.querySelectorAll('[data-lang]');
+    langLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetLang = (e.currentTarget as HTMLElement).getAttribute('data-lang');
+        if (targetLang) {
+          localStorage.setItem('user-lang', targetLang);
+        }
+      });
+    });
+  }
+  
+  // Setup on initial load
+  setupLangLinks();
+  
+  // Setup after each View Transition
+  document.addEventListener('astro:after-swap', setupLangLinks);
+</script>

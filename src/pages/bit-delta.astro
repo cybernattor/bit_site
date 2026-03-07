@@ -6,9 +6,22 @@ import FeatureCard from '../components/FeatureCard.astro';
 const title = 'bit Delta — Шагомер и отслеживание здоровья';
 const description = 'bit Delta — шагомер, отслеживание активности и здоровья.';
 const image = '/og-bit-hub.png';
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "SoftwareApplication",
+	"name": "bit Delta",
+	"operatingSystem": "Android",
+	"applicationCategory": "HealthApplication",
+	"offers": {
+		"@type": "Offer",
+		"price": "0",
+		"priceCurrency": "USD"
+	}
+};
 ---
 
-<Layout title={title} description={description} image={image}>
+<Layout title={title} description={description} schema={schema} image={image}>
 	<section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
 		<div class="container mx-auto px-4 py-16 md:py-24">
 			<div class="max-w-4xl mx-auto z-10 relative">

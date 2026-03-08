@@ -21,16 +21,16 @@ const schema = {
 
 <Layout title={title} description={description} schema={schema}>
 	<!-- Hero Section -->
-	<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+	<section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
 		<div class="container mx-auto px-4 py-16 md:py-24">
 			<div class="text-center max-w-4xl mx-auto z-10 relative">
 				<div class="mb-6" style="view-transition-name: hero-logo;">
 					<img src="/favicon.svg" alt="bit Tecnologies" class="w-20 h-20 mx-auto mb-6 drop-shadow-lg" />
 				</div>
-				<h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-emerald-500 bg-clip-text text-transparent animate-pulse font-display drop-shadow-sm">
+				<h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-emerald-600 dark:from-blue-500 dark:to-emerald-500 bg-clip-text text-transparent animate-pulse font-display drop-shadow-sm">
 					bit Tecnologies
 				</h1>
-				<p class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed font-light">
+				<p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed font-light transition-colors">
 					{t('hero.subtitle')}
 				</p>
 				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -54,11 +54,11 @@ const schema = {
 	</section>
 
 	<!-- App Showcase -->
-	<section id="apps" class="py-16 md:py-24 bg-slate-900/50">
+	<section id="apps" class="py-16 md:py-24 bg-slate-50/50 dark:bg-slate-900/50 transition-colors duration-300">
 		<div class="container mx-auto px-4">
 			<div class="text-center mb-12">
-				<h2 class="text-3xl md:text-4xl font-bold mb-4 text-white font-display">{t('home.apps')}</h2>
-				<p class="text-slate-400 max-w-2xl mx-auto font-light">
+				<h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white font-display">{t('home.apps')}</h2>
+				<p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-light transition-colors">
 					{t('home.apps_subtitle')}
 				</p>
 			</div>
@@ -109,12 +109,12 @@ const schema = {
 	</section>
 
 	<!-- Android Compatibility -->
-	<section id="compatibility" class="py-16 md:py-24 bg-slate-900">
+	<section id="compatibility" class="py-16 md:py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
 		<div class="container mx-auto px-4">
 			<div class="max-w-4xl mx-auto">
 				<div class="text-center mb-12">
-					<h2 class="text-3xl md:text-4xl font-bold mb-4 text-white font-display">{t('home.compatibility')}</h2>
-					<p class="text-slate-400 font-light">
+					<h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white font-display">{t('home.compatibility')}</h2>
+					<p class="text-slate-600 dark:text-slate-400 font-light transition-colors">
 						{t('home.compatibility_subtitle')}
 					</p>
 				</div>
@@ -124,21 +124,21 @@ const schema = {
             <svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9,11H7V13H9V11M13,11H11V13H13V11M17,11H15V13H17V11M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V9H19V20Z"/>
             </svg>
-						<ul class="space-y-2 text-slate-300">
+						<ul class="space-y-2 text-slate-600 dark:text-slate-300 transition-colors">
 							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+								<svg class="w-4 h-4 text-emerald-500 dark:text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
 									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
 								</svg>
 								<span>Android 10 (API 29) and higher</span>
 							</li>
 							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+								<svg class="w-4 h-4 text-emerald-500 dark:text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
 									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
 								</svg>
 								<span>2 GB RAM (recommended)</span>
 							</li>
 							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+								<svg class="w-4 h-4 text-emerald-500 dark:text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
 									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
 								</svg>
 								<span>ARMv7 or ARM64 architecture</span>
@@ -150,21 +150,21 @@ const schema = {
             <svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
             </svg>
-						<ul class="space-y-2 text-slate-300">
+						<ul class="space-y-2 text-slate-600 dark:text-slate-300 transition-colors">
 							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+								<svg class="w-4 h-4 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
 									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
 								</svg>
 								<span>Tested on Android 16</span>
 							</li>
 							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+								<svg class="w-4 h-4 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
 									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
 								</svg>
 								<span>Support for older devices like Mi A2 Lite</span>
 							</li>
 							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+								<svg class="w-4 h-4 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
 									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
 								</svg>
 								<span>Optimization for low-end hardware</span>
@@ -177,11 +177,11 @@ const schema = {
 	</section>
 
 	<!-- Download CTA -->
-	<section id="download" class="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+	<section id="download" class="py-16 md:py-24 bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300 border-t border-slate-200 dark:border-slate-800">
 		<div class="container mx-auto px-4">
 			<div class="text-center max-w-3xl mx-auto">
-				<h2 class="text-3xl md:text-4xl font-bold mb-6 text-white font-display">Ready to try?</h2>
-				<p class="text-lg text-slate-300 mb-8 font-light">
+				<h2 class="text-3xl md:text-4xl font-bold mb-6 text-slate-900 dark:text-white font-display">Ready to try?</h2>
+				<p class="text-lg text-slate-600 dark:text-slate-300 mb-8 font-light transition-colors">
 					Download bit Hub now and experience the benefits of native Android applications
 				</p>
         <Button href="#download" variant="primary" download>

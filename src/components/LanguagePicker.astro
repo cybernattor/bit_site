@@ -61,6 +61,20 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
 </div>
 
 <script>
+  let activeMenu: HTMLElement | null = null;
+
+  function handleOutsideClick(e: MouseEvent) {
+    const container = document.getElementById('lang-picker-container');
+    const dropdown = document.getElementById('lang-dropdown');
+    const btn = document.getElementById('lang-menu-button');
+    
+    if (container && dropdown && btn && !container.contains(e.target as Node)) {
+      btn.setAttribute('aria-expanded', 'false');
+      dropdown.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+      dropdown.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+    }
+  }
+
   function setupLangPicker() {
     const container = document.getElementById('lang-picker-container');
     const btn = document.getElementById('lang-menu-button');
@@ -69,14 +83,13 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
     if (!btn || !dropdown || !container) return;
 
     function toggleMenu(show: boolean) {
-      const isExpanded = show;
-      btn.setAttribute('aria-expanded', String(isExpanded));
+      btn!.setAttribute('aria-expanded', String(show));
       if (show) {
-        dropdown.classList.remove('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
-        dropdown.classList.add('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+        dropdown!.classList.remove('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+        dropdown!.classList.add('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
       } else {
-        dropdown.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
-        dropdown.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+        dropdown!.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+        dropdown!.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
       }
     }
 
@@ -86,12 +99,9 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
       toggleMenu(!isExpanded);
     });
 
-    // Close on click outside
-    document.addEventListener('click', (e) => {
-      if (!container.contains(e.target as Node)) {
-        toggleMenu(false);
-      }
-    });
+    // Cleanup and add global listener using persistent reference
+    document.removeEventListener('click', handleOutsideClick);
+    document.addEventListener('click', handleOutsideClick);
 
     // Handle language links persistence
     const langLinks = document.querySelectorAll('[data-lang]');

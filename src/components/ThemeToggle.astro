@@ -8,29 +8,24 @@
 </button>
 
 <script>
-  function setupThemeToggle() {
+  function syncThemeToggle() {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
     if (!themeToggleBtn || !themeToggleDarkIcon || !themeToggleLightIcon) return;
 
-    // Use current state to initialize icons
-    const isDark = localStorage.getItem('color-theme') === 'dark' || 
-                 (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    // Use current document class state to sync icons
+    const isDark = document.documentElement.classList.contains('dark');
 
-    // Sync HTML class and icons
     if (isDark) {
-      document.documentElement.classList.add('dark');
       themeToggleLightIcon.classList.remove('hidden');
       themeToggleDarkIcon.classList.add('hidden');
     } else {
-      document.documentElement.classList.remove('dark');
       themeToggleDarkIcon.classList.remove('hidden');
       themeToggleLightIcon.classList.add('hidden');
     }
 
-    // Single consistent listener
     themeToggleBtn.onclick = () => {
       const isCurrentlyDark = document.documentElement.classList.contains('dark');
       
@@ -49,7 +44,7 @@
   }
 
   // Setup on initial load
-  setupThemeToggle();
-  // Setup after each View Transition
-  document.addEventListener('astro:after-swap', setupThemeToggle);
+  syncThemeToggle();
+  // Sync after each View Transition (Layout.astro handles the html class)
+  document.addEventListener('astro:after-swap', syncThemeToggle);
 </script>

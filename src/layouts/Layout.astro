@@ -65,11 +65,29 @@ const jsonLd = schema || defaultSchema;
 
     <!-- Inline script to prevent FOUC with dark mode -->
     <script is:inline>
-      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      function applyTheme() {
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark');
-      } else {
+        } else {
           document.documentElement.classList.remove('dark')
+        }
       }
+
+      // Initial load
+      applyTheme();
+
+      // Handle View Transitions
+      document.addEventListener('astro:before-swap', (ev) => {
+        const isDark = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+          ev.newDocument.documentElement.classList.add('dark');
+        } else {
+          ev.newDocument.documentElement.classList.remove('dark');
+        }
+      });
+      
+      // Secondary check for robustness
+      document.addEventListener('astro:after-swap', applyTheme);
     </script>
 	</head>
 	<body class="bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-[Inter:sans-serif] antialiased transition-colors duration-300">

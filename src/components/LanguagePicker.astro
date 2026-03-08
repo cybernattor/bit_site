@@ -10,7 +10,7 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
 const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
 ---
 
-<div class="relative inline-block text-left group">
+<div class="relative inline-block text-left" id="lang-picker-container">
   <button 
     type="button" 
     class="inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200" 
@@ -28,7 +28,8 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
   </button>
 
   <div 
-    class="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 dark:divide-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 transform pointer-events-none group-hover:pointer-events-auto"
+    id="lang-dropdown"
+    class="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 dark:divide-slate-700 opacity-0 invisible transition-all duration-200 z-50 transform scale-95 pointer-events-none"
     role="menu" 
     aria-orientation="vertical" 
     aria-labelledby="lang-menu-button" 
@@ -60,8 +61,39 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
 </div>
 
 <script>
-  // Persist language selection in localStorage
-  function setupLangLinks() {
+  function setupLangPicker() {
+    const container = document.getElementById('lang-picker-container');
+    const btn = document.getElementById('lang-menu-button');
+    const dropdown = document.getElementById('lang-dropdown');
+    
+    if (!btn || !dropdown || !container) return;
+
+    function toggleMenu(show: boolean) {
+      const isExpanded = show;
+      btn.setAttribute('aria-expanded', String(isExpanded));
+      if (show) {
+        dropdown.classList.remove('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+        dropdown.classList.add('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+      } else {
+        dropdown.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+        dropdown.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+      }
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      toggleMenu(!isExpanded);
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target as Node)) {
+        toggleMenu(false);
+      }
+    });
+
+    // Handle language links persistence
     const langLinks = document.querySelectorAll('[data-lang]');
     langLinks.forEach(link => {
       link.addEventListener('click', (e) => {
@@ -73,9 +105,7 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
     });
   }
   
-  // Setup on initial load
-  setupLangLinks();
-  
-  // Setup after each View Transition
-  document.addEventListener('astro:after-swap', setupLangLinks);
+  // Initialize
+  setupLangPicker();
+  document.addEventListener('astro:after-swap', setupLangPicker);
 </script>

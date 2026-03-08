@@ -10,7 +10,7 @@ export interface Props {
 const { title, description, iconColor, iconBgColor } = Astro.props;
 ---
 
-<div class="glass-effect rounded-xl p-6 hover:bg-slate-800/70 transition-all duration-300 group h-full">
+<div class="glass-effect rounded-xl p-5 md:p-6 hover:bg-slate-800/70 transition-all duration-300 group h-full">
   <div class="flex items-center space-x-3 mb-4">
     {iconBgColor ? (
       <div class={`w-16 h-16 bg-gradient-to-br transition-transform duration-300 group-hover:scale-110 ${iconBgColor} rounded-lg flex items-center justify-center mx-auto mb-4`}>

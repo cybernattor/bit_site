@@ -1,0 +1,199 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AppCard from '../../components/AppCard.astro';
+import Button from '../../components/Button.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations('en');
+
+const title = 'bit Tecnologies — Ecosystem of convenient apps';
+const description = 'bit Tecnologies develops native, fast, and private Android applications. No telemetry, no ads.';
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": "bit Tecnologies",
+	"url": "https://cybernattor.github.io/en",
+	"description": description
+};
+---
+
+<Layout title={title} description={description} schema={schema}>
+	<!-- Hero Section -->
+	<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+		<div class="container mx-auto px-4 py-16 md:py-24">
+			<div class="text-center max-w-4xl mx-auto z-10 relative">
+				<div class="mb-6" style="view-transition-name: hero-logo;">
+					<img src="/favicon.svg" alt="bit Tecnologies" class="w-20 h-20 mx-auto mb-6 drop-shadow-lg" />
+				</div>
+				<h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-emerald-500 bg-clip-text text-transparent animate-pulse font-display drop-shadow-sm">
+					bit Tecnologies
+				</h1>
+				<p class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed font-light">
+					{t('hero.subtitle')}
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+					<Button href="#download" variant="primary" download>
+						<svg class="w-5 h-5 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+						</svg>
+						<span>{t('hero.download_hub')} (APK)</span>
+					</Button>
+					<Button href="/en/about" variant="outline">
+						{t('nav.about')}
+					</Button>
+				</div>
+			</div>
+		</div>
+		<!-- Decorative gradient -->
+		<div class="absolute inset-0 bg-gradient-to-t from-blue-500/5 to-transparent pointer-events-none"></div>
+		<!-- Animated background elements -->
+		<div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+		<div class="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+	</section>
+
+	<!-- App Showcase -->
+	<section id="apps" class="py-16 md:py-24 bg-slate-900/50">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold mb-4 text-white font-display">{t('home.apps')}</h2>
+				<p class="text-slate-400 max-w-2xl mx-auto font-light">
+					{t('home.apps_subtitle')}
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+				<!-- bit Hub Card -->
+        <AppCard 
+          href="/en/bit-hub"
+          name="bit Hub"
+          status={{ label: "Beta", color: "emerald" }}
+          description={t('app.bithub_desc')}
+          requirements="Android 10+"
+          size="2.4 MB"
+          iconImage="/favicon.svg"
+        />
+
+				<!-- bit Delta Card -->
+        <AppCard 
+          href="/en/bit-delta"
+          name="bit Delta"
+          status={{ label: "In Development", color: "blue" }}
+          description={t('app.bitdelta_desc')}
+          requirements="Android 12+"
+          size="~5 MB"
+          iconBgColor="from-purple-500 to-pink-500"
+        >
+          <svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+          </svg>
+        </AppCard>
+
+				<!-- bit Record Card -->
+        <AppCard 
+          href="/en/bit-record"
+          name="bit Record"
+          status={{ label: "Planning", color: "yellow" }}
+          description={t('app.bitrecord_desc')}
+          requirements="Android 11+"
+          size="~3 MB"
+          iconBgColor="from-red-500 to-orange-500"
+        >
+          <svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11H16V16H8V11H9.2V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.4,8.7 10.4,10V11H13.6V10C13.6,8.7 12.8,8.2 12,8.2Z"/>
+          </svg>
+        </AppCard>
+			</div>
+		</div>
+	</section>
+
+	<!-- Android Compatibility -->
+	<section id="compatibility" class="py-16 md:py-24 bg-slate-900">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto">
+				<div class="text-center mb-12">
+					<h2 class="text-3xl md:text-4xl font-bold mb-4 text-white font-display">{t('home.compatibility')}</h2>
+					<p class="text-slate-400 font-light">
+						{t('home.compatibility_subtitle')}
+					</p>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <FeatureCard title="Minimum Requirements" iconColor="text-green-500">
+            <svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M9,11H7V13H9V11M13,11H11V13H13V11M17,11H15V13H17V11M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V9H19V20Z"/>
+            </svg>
+						<ul class="space-y-2 text-slate-300">
+							<li class="flex items-center space-x-2">
+								<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+								<span>Android 10 (API 29) and higher</span>
+							</li>
+							<li class="flex items-center space-x-2">
+								<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+								<span>2 GB RAM (recommended)</span>
+							</li>
+							<li class="flex items-center space-x-2">
+								<svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+								<span>ARMv7 or ARM64 architecture</span>
+							</li>
+						</ul>
+          </FeatureCard>
+
+          <FeatureCard title="Testing" iconColor="text-blue-500">
+            <svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+            </svg>
+						<ul class="space-y-2 text-slate-300">
+							<li class="flex items-center space-x-2">
+								<svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+								<span>Tested on Android 16</span>
+							</li>
+							<li class="flex items-center space-x-2">
+								<svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+								<span>Support for older devices like Mi A2 Lite</span>
+							</li>
+							<li class="flex items-center space-x-2">
+								<svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+								</svg>
+								<span>Optimization for low-end hardware</span>
+							</li>
+						</ul>
+          </FeatureCard>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Download CTA -->
+	<section id="download" class="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+		<div class="container mx-auto px-4">
+			<div class="text-center max-w-3xl mx-auto">
+				<h2 class="text-3xl md:text-4xl font-bold mb-6 text-white font-display">Ready to try?</h2>
+				<p class="text-lg text-slate-300 mb-8 font-light">
+					Download bit Hub now and experience the benefits of native Android applications
+				</p>
+        <Button href="#download" variant="primary" download>
+					<svg class="w-6 h-6 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+					</svg>
+					<span>Download bit Hub</span>
+        </Button>
+				<p class="text-sm text-slate-500 mt-4">
+					File size: ~2.4 MB • Requires Android 10+ • Installation from unknown sources
+				</p>
+			</div>
+		</div>
+	</section>
+</Layout>

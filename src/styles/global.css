@@ -35,22 +35,273 @@
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(to right, rgb(59 130 246), rgb(16 185 129));
+    background: linear-gradient(135deg, #3b82f6, #06b6d4, #10b981);
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
   }
 
   .glass-effect {
-    @apply bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800;
+    @apply bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
   }
 
+  .glass-effect:hover {
+    box-shadow: 0 8px 40px rgba(59, 130, 246, 0.08);
+  }
+
+  /* ==========================================
+     SCROLL REVEAL ANIMATIONS
+     ========================================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.85);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Staggered children delay */
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+  .stagger-5 { transition-delay: 0.5s; }
+  .stagger-6 { transition-delay: 0.6s; }
+
+  /* ==========================================
+     CURSOR GLOW EFFECT
+     ========================================== */
+  .cursor-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cursor-glow::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .cursor-glow:hover::before {
+    opacity: 1;
+  }
+
+  /* ==========================================
+     GRADIENT BORDERS
+     ========================================== */
+  .gradient-border {
+    position: relative;
+    border: none !important;
+  }
+
+  .gradient-border::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(16, 185, 129, 0.4), rgba(139, 92, 246, 0.4));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* ==========================================
+     FLOATING ANIMATION
+     ========================================== */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
   }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+
+  /* ==========================================
+     GLOW EFFECTS
+     ========================================== */
+  .glow-blue {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.15), 0 0 80px rgba(59, 130, 246, 0.05);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.15), 0 0 80px rgba(16, 185, 129, 0.05);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.15), 0 0 80px rgba(139, 92, 246, 0.05);
+  }
+
+  /* ==========================================
+     ANIMATED COUNTER/TEXT SHIMMER
+     ========================================== */
+  .shimmer-text {
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.25) 50%,
+      transparent 80%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+    -webkit-background-clip: text;
+  }
+
+  /* ==========================================
+     MESH GRADIENT BACKGROUND
+     ========================================== */
+  .mesh-gradient {
+    background:
+      radial-gradient(at 20% 20%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+      radial-gradient(at 80% 10%, rgba(16, 185, 129, 0.06) 0px, transparent 50%),
+      radial-gradient(at 60% 80%, rgba(139, 92, 246, 0.06) 0px, transparent 50%),
+      radial-gradient(at 10% 70%, rgba(236, 72, 153, 0.05) 0px, transparent 50%);
+  }
+
+  .dark .mesh-gradient {
+    background:
+      radial-gradient(at 20% 20%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
+      radial-gradient(at 80% 10%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+      radial-gradient(at 60% 80%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
+      radial-gradient(at 10% 70%, rgba(236, 72, 153, 0.06) 0px, transparent 50%);
+  }
+
+  /* ==========================================
+     TILT CARD EFFECT
+     ========================================== */
+  .tilt-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+  }
+
+  .tilt-card:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+  }
+
+  /* ==========================================
+     ANIMATED LINE
+     ========================================== */
+  .animated-line {
+    position: relative;
+  }
+
+  .animated-line::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #10b981);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 1px;
+  }
+
+  .animated-line:hover::after {
+    width: 100%;
+  }
+
+  /* ==========================================
+     STAT COUNTER PULSE
+     ========================================== */
+  .stat-highlight {
+    position: relative;
+    display: inline-block;
+  }
+
+  .stat-highlight::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+    z-index: -1;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+}
+
+/* ==========================================
+   KEYFRAMES
+   ========================================== */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
 }

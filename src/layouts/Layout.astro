@@ -92,7 +92,7 @@ const jsonLd = schema || defaultSchema;
       document.addEventListener('astro:after-swap', applyTheme);
     </script>
 	</head>
-	<body class="bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-[Inter:sans-serif] antialiased transition-colors duration-300">
+	<body class="bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-[Inter,sans-serif] antialiased transition-colors duration-300">
 		<div class="min-h-screen flex flex-col">
 			<!-- Header Component -->
 			<Header />
@@ -105,5 +105,53 @@ const jsonLd = schema || defaultSchema;
 			<!-- Footer Component -->
 			<Footer />
 		</div>
+
+		<!-- Scroll Reveal Observer -->
+		<script>
+			function setupRevealObserver() {
+				const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+				
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('visible');
+						}
+					});
+				}, {
+					threshold: 0.1,
+					rootMargin: '0px 0px -50px 0px'
+				});
+				
+				reveals.forEach(el => observer.observe(el));
+			}
+
+			// Cursor glow effect
+			function setupCursorGlow() {
+				document.querySelectorAll('.cursor-glow').forEach(el => {
+					el.addEventListener('mousemove', (e) => {
+						const rect = (el as HTMLElement).getBoundingClientRect();
+						const x = e.clientX - rect.left;
+						const y = e.clientY - rect.top;
+						(el as HTMLElement).style.setProperty('--glow-x', `${x}px`);
+						(el as HTMLElement).style.setProperty('--glow-y', `${y}px`);
+						const before = (el as HTMLElement).querySelector('.glow-indicator') as HTMLElement;
+						if (before) {
+							before.style.left = `${x}px`;
+							before.style.top = `${y}px`;
+						}
+					});
+				});
+			}
+
+			// Setup on initial load
+			setupRevealObserver();
+			setupCursorGlow();
+			
+			// Re-setup after View Transitions
+			document.addEventListener('astro:after-swap', () => {
+				setupRevealObserver();
+				setupCursorGlow();
+			});
+		</script>
 	</body>
 </html>

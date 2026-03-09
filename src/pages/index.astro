@@ -37,14 +37,18 @@ const schema = {
   <!-- Redirect snippet for new un-preferenced english users -->
   <script is:inline>
     (function () {
-      const storedLang = localStorage.getItem('user-lang');
-      if (!storedLang && window.location.pathname === '/') {
-        const browserLang = navigator.language || navigator.userLanguage;
-        const preferredLang = browserLang.toLowerCase().startsWith('en') ? 'en' : 'ru';
-        localStorage.setItem('user-lang', preferredLang);
-        if (preferredLang === 'en') {
-          window.location.replace('/en/');
+      try {
+        const storedLang = localStorage.getItem('user-lang');
+        if (!storedLang && window.location.pathname === '/') {
+          const browserLang = navigator.language || navigator.userLanguage;
+          const preferredLang = browserLang.toLowerCase().startsWith('en') ? 'en' : 'ru';
+          localStorage.setItem('user-lang', preferredLang);
+          if (preferredLang === 'en') {
+            window.location.replace('/en/');
+          }
         }
+      } catch (e) {
+        // Fallback: do nothing if localStorage is not available
       }
     })();
   </script>
@@ -58,8 +62,8 @@ const schema = {
 					<div class="relative inline-block">
 						<Image src={favicon} alt="bit Tecnologies" class="w-24 h-24 mx-auto drop-shadow-2xl animate-float" />
 						<!-- Orbital ring -->
-						<div class="absolute inset-0 w-32 h-32 -m-4 mx-auto border border-blue-500/20 rounded-full animate-spin-slow"></div>
-						<div class="absolute inset-0 w-40 h-40 -m-8 mx-auto border border-emerald-500/10 rounded-full animate-spin-slow" style="animation-direction: reverse; animation-duration: 25s;"></div>
+						<div class="absolute inset-0 w-32 h-32 -m-4 mx-auto border border-blue-500/5 rounded-full animate-spin-slow"></div>
+						<div class="absolute inset-0 w-40 h-40 -m-8 mx-auto border border-emerald-500/3 rounded-full animate-spin-slow" style="animation-direction: reverse; animation-duration: 25s;"></div>
 					</div>
 				</div>
 

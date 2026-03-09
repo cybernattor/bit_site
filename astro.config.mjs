@@ -11,5 +11,16 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: false
     }
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['astro']
+          }
+        }
+      }
+    }
   }
 });

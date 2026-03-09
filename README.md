@@ -96,3 +96,5 @@ npm run preview
 ## Лицензия
 
 © 2026 bit Tecnologies. Все права защищены.
+
+Этот проект распространяется под [MIT License](LICENSE).

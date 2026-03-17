@@ -11,11 +11,11 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
 ---
 
 <div class="relative inline-block text-left" id="lang-picker-container">
-  <button 
-    type="button" 
-    class="inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200" 
-    id="lang-menu-button" 
-    aria-expanded="false" 
+  <button
+    type="button"
+    class="inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200 min-h-[44px] min-w-[44px]"
+    id="lang-menu-button"
+    aria-expanded="false"
     aria-haspopup="true"
   >
     <span class="sr-only">Выбрать язык / Choose Language</span>
@@ -27,29 +27,29 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
     </span>
   </button>
 
-  <div 
+  <div
     id="lang-dropdown"
     class="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 dark:divide-slate-700 opacity-0 invisible transition-all duration-200 z-50 transform scale-95 pointer-events-none"
-    role="menu" 
-    aria-orientation="vertical" 
-    aria-labelledby="lang-menu-button" 
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="lang-menu-button"
     tabindex="-1"
   >
     <div class="py-1" role="none">
-      <a 
+      <a
         href={lang === 'ru' ? '#' : translatePath(Astro.url)(currentPath, 'ru')}
         class={`block px-4 py-2 text-sm transition-colors ${lang === 'ru' ? 'bg-slate-100 dark:bg-slate-700 text-purple-600 dark:text-purple-400 font-semibold cursor-default' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'}`}
-        role="menuitem" 
+        role="menuitem"
         tabindex="-1"
         id="lang-ru"
         data-lang="ru"
       >
         RU
       </a>
-      <a 
+      <a
         href={lang === 'en' ? '#' : translatePath(Astro.url)(currentPath, 'en')}
         class={`block px-4 py-2 text-sm transition-colors ${lang === 'en' ? 'bg-slate-100 dark:bg-slate-700 text-purple-600 dark:text-purple-400 font-semibold cursor-default' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'}`}
-        role="menuitem" 
+        role="menuitem"
         tabindex="-1"
         id="lang-en"
         data-lang="en"
@@ -63,11 +63,11 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
 <script>
   let activeMenu: HTMLElement | null = null;
 
-  function handleOutsideClick(e: MouseEvent) {
+  function handleOutsideClick(e: MouseEvent | TouchEvent) {
     const container = document.getElementById('lang-picker-container');
     const dropdown = document.getElementById('lang-dropdown');
     const btn = document.getElementById('lang-menu-button');
-    
+
     if (container && dropdown && btn && !container.contains(e.target as Node)) {
       btn.setAttribute('aria-expanded', 'false');
       dropdown.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
@@ -79,7 +79,7 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
     const container = document.getElementById('lang-picker-container');
     const btn = document.getElementById('lang-menu-button');
     const dropdown = document.getElementById('lang-dropdown');
-    
+
     if (!btn || !dropdown || !container) return;
 
     function toggleMenu(show: boolean) {
@@ -93,20 +93,41 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
       }
     }
 
-    btn.addEventListener('click', (e) => {
+    // Handle both click and touch events for mobile compatibility
+    const handleMenuToggle = (e: MouseEvent | TouchEvent) => {
+      e.preventDefault();
       e.stopPropagation();
       const isExpanded = btn.getAttribute('aria-expanded') === 'true';
       toggleMenu(!isExpanded);
-    });
+    };
+
+    // Clean up existing listeners
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode?.replaceChild(newBtn, btn);
+
+    newBtn.addEventListener('click', handleMenuToggle);
+    newBtn.addEventListener('touchend', handleMenuToggle);
 
     // Cleanup and add global listener using persistent reference
     document.removeEventListener('click', handleOutsideClick);
+    document.removeEventListener('touchend', handleOutsideClick);
     document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('touchend', handleOutsideClick);
 
     // Handle language links persistence
     const langLinks = document.querySelectorAll('[data-lang]');
     langLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+      // Clean up existing listeners
+      const newLink = link.cloneNode(true);
+      link.parentNode?.replaceChild(newLink, link);
+
+      newLink.addEventListener('click', (e) => {
+        const targetLang = (e.currentTarget as HTMLElement).getAttribute('data-lang');
+        if (targetLang) {
+          localStorage.setItem('user-lang', targetLang);
+        }
+      });
+      newLink.addEventListener('touchend', (e) => {
         const targetLang = (e.currentTarget as HTMLElement).getAttribute('data-lang');
         if (targetLang) {
           localStorage.setItem('user-lang', targetLang);
@@ -114,7 +135,7 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
       });
     });
   }
-  
+
   // Initialize
   setupLangPicker();
   document.addEventListener('astro:after-swap', setupLangPicker);

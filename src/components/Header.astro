@@ -31,7 +31,7 @@ const translate = translatePath(Astro.url);
       <div class="md:hidden flex items-center space-x-4">
         <LanguagePicker />
         <ThemeToggle />
-        <button class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors" id="mobile-menu-btn" aria-label="Toggle menu">
+        <button class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors min-h-[44px] min-w-[44px] p-2" id="mobile-menu-btn" aria-label="Toggle menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -54,28 +54,40 @@ const translate = translatePath(Astro.url);
   function setupMobileMenu() {
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
-    
+
     if (btn && menu) {
       // Clean up old listeners (for ViewTransitions)
       const newBtn = btn.cloneNode(true);
       btn.parentNode?.replaceChild(newBtn, btn);
-      
-      newBtn.addEventListener('click', () => {
+
+      // Handle both click and touch events for mobile compatibility
+      const handleMenuToggle = (e: MouseEvent | TouchEvent) => {
+        e.preventDefault();
         menu.classList.toggle('hidden');
-      });
+      };
+
+      newBtn.addEventListener('click', handleMenuToggle);
+      newBtn.addEventListener('touchend', handleMenuToggle);
 
       // Close mobile menu when clicking on a link
-      document.querySelectorAll('#mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
+      const menuLinks = document.querySelectorAll('#mobile-menu a');
+      menuLinks.forEach(link => {
+        const newLink = link.cloneNode(true);
+        link.parentNode?.replaceChild(newLink, link);
+
+        const handleLinkClick = (e: MouseEvent | TouchEvent) => {
           menu.classList.add('hidden');
-        });
+        };
+
+        newLink.addEventListener('click', handleLinkClick);
+        newLink.addEventListener('touchend', handleLinkClick);
       });
     }
   }
 
   // Setup on initial load
   setupMobileMenu();
-  
+
   // Setup after each View Transition
   document.addEventListener('astro:after-swap', setupMobileMenu);
 </script>

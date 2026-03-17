@@ -1,0 +1,16 @@
+{
+  "name": "bit Tecnologies",
+  "short_name": "bit Tec",
+  "description": "Экосистема удобных приложений",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

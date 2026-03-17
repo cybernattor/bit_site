@@ -88,6 +88,9 @@ const schema = {
 					<Button href={translate('/about')} variant="outline">
 						{t('hero.about_company')}
 					</Button>
+					<Button href="#apps" variant="ghost">
+						{t('hero.apps_catalog')}
+					</Button>
 				</div>
 			</div>
 		</div>
@@ -148,7 +151,7 @@ const schema = {
 						</svg>
 					</div>
 					<h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-display">Лёгкий вес</h3>
-					<p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">Всего ~100 МБ — оптимизированный размер с всеми функциями. Ноль лишних зависимостей, только нужный функционал.</p>
+					<p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">Всего {release?.size || '~100 МБ'} — оптимизированный размер с всеми функциями. Ноль лишних зависимостей, только нужный функционал.</p>
 				</div>
 
 				<!-- Advantage 4: Open Source -->
@@ -214,6 +217,34 @@ const schema = {
 		</div>
 	</section>
 
+	<!-- ============================== FEATURES CTA SECTION ============================== -->
+	<section class="py-16 relative overflow-hidden bg-gradient-to-br from-blue-50 to-emerald-50 dark:from-slate-800/50 dark:to-slate-900/50 transition-colors duration-500">
+		<div class="container mx-auto px-4">
+			<div class="text-center max-w-4xl mx-auto reveal">
+				<h2 class="text-3xl md:text-4xl font-bold mb-6 text-slate-900 dark:text-white font-display">
+					Готовы попробовать нативную производительность?
+				</h2>
+				<p class="text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto font-light">
+					Присоединяйтесь к тысячам пользователей, которые уже оценили преимущества наших приложений. Никакой телеметрии, никакой рекламы — только чистый функционал.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+					<Button href={downloadUrl} variant="primary" download>
+						<svg class="w-5 h-5 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+						</svg>
+						<span>Скачать bit Hub</span>
+					</Button>
+					<Button href="#apps" variant="outline">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+						</svg>
+						<span>Все приложения</span>
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- ============================== APP SHOWCASE ============================== -->
 	<section id="apps" class="py-20 md:py-32 mesh-gradient bg-slate-50 dark:bg-slate-900/50 transition-colors duration-500">
 		<div class="container mx-auto px-4">
@@ -233,7 +264,7 @@ const schema = {
 						status={{ label: "Beta", color: "emerald" }}
 						description={t('app.bithub_desc')}
 						requirements="Android 10+"
-						size="~100 МБ"
+						size={release?.size || '~100 МБ'}
 						iconImage="/favicon.svg"
 					/>
 				</div>
@@ -269,6 +300,53 @@ const schema = {
 						</svg>
 					</AppCard>
 				</div>
+			</div>
+
+			<!-- CTA within apps section -->
+			<div class="text-center mt-12 reveal">
+				<p class="text-slate-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto font-light">
+					Исследуйте все наши приложения и найдите то, что идеально подходит для вас
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+					<Button href={downloadUrl} variant="primary" download>
+						<svg class="w-5 h-5 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+						</svg>
+						<span>Скачать bit Hub</span>
+					</Button>
+					<Button href="https://github.com/cybernattor/bit-site" variant="outline" target="_blank" rel="noopener noreferrer">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+						</svg>
+						<span>Посмотреть на GitHub</span>
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ============================== APPS CTA ============================== -->
+	<section class="py-12 bg-gradient-to-r from-blue-600 to-emerald-600 dark:from-blue-500 dark:to-emerald-500">
+		<div class="container mx-auto px-4 text-center">
+			<h3 class="text-2xl md:text-3xl font-bold text-white mb-4 font-display">
+				Начните использовать bit приложения уже сегодня
+			</h3>
+			<p class="text-blue-100 mb-6 max-w-2xl mx-auto">
+				Присоединяйтесь к сообществу пользователей, которые ценят приватность и производительность
+			</p>
+			<div class="flex flex-col sm:flex-row gap-4 justify-center">
+				<Button href={downloadUrl} variant="primary" download class="bg-white text-blue-600 hover:bg-blue-50">
+					<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+					</svg>
+					<span>Скачать bit Hub</span>
+				</Button>
+				<Button href="https://github.com/cybernattor/bit-site" variant="outline" class="border-white text-white hover:bg-white hover:text-blue-600">
+					<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+					</svg>
+					<span>GitHub</span>
+				</Button>
 			</div>
 		</div>
 	</section>
@@ -364,8 +442,22 @@ const schema = {
 						</svg>
 						<span>{t('hero.download_hub')}</span>
 					</Button>
+					<div class="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
+						<Button href="#apps" variant="outline" class="text-sm">
+							<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+							</svg>
+							<span>Все приложения</span>
+						</Button>
+						<Button href="https://github.com/cybernattor/bit-site" variant="outline" class="text-sm" target="_blank" rel="noopener noreferrer">
+							<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+							</svg>
+							<span>GitHub</span>
+						</Button>
+					</div>
 					<p class="text-sm text-slate-500 dark:text-slate-400 mt-6">
-						Размер: ~100 МБ • Android 6+ • Установка из неизвестных источников
+						Размер: {release?.size || '~100 МБ'} • Android 6+ • Установка из неизвестных источников
 					</p>
 				</div>
 			</div>

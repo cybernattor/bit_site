@@ -4,8 +4,11 @@ import AppCard from '../../components/AppCard.astro';
 import Button from '../../components/Button.astro';
 import FeatureCard from '../../components/FeatureCard.astro';
 import { useTranslations } from '../../i18n/utils';
+import { fetchLatestRelease } from '../../utils/github';
 
 const t = useTranslations('en');
+
+const release = await fetchLatestRelease('cybernattor/bit-hub', 'en');
 
 const title = 'bit Tecnologies — Ecosystem of convenient apps';
 const description = 'bit Tecnologies develops native, fast, and private Android applications. No telemetry, no ads.';
@@ -71,7 +74,7 @@ const schema = {
           status={{ label: "Beta", color: "emerald" }}
           description={t('app.bithub_desc')}
           requirements="Android 10+"
-          size="2.4 MB"
+          size={release?.size || '2.4 MB'}
           iconImage="/favicon.svg"
         />
 
@@ -82,7 +85,7 @@ const schema = {
           status={{ label: "In Development", color: "blue" }}
           description={t('app.bitdelta_desc')}
           requirements="Android 12+"
-          size="~5 MB"
+          size={release?.size || '~5 MB'}
           iconBgColor="from-purple-500 to-pink-500"
         >
           <svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -191,7 +194,7 @@ const schema = {
 					<span>Download bit Hub</span>
         </Button>
 				<p class="text-sm text-slate-500 mt-4">
-					File size: ~2.4 MB • Requires Android 10+ • Installation from unknown sources
+					File size: {release?.size || '~2.4 MB'} • Requires Android 10+ • Installation from unknown sources
 				</p>
 			</div>
 		</div>

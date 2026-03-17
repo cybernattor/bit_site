@@ -52,6 +52,18 @@
     box-shadow: 0 8px 40px rgba(59, 130, 246, 0.08);
   }
 
+  /* Mobile-optimized glass effect */
+  @media (max-width: 768px) {
+    .glass-effect {
+      @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .glass-effect:hover {
+      box-shadow: 0 4px 25px rgba(59, 130, 246, 0.06);
+    }
+  }
+
   /* ==========================================
      SCROLL REVEAL ANIMATIONS
      ========================================== */
@@ -149,6 +161,7 @@
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(16, 185, 129, 0.4), rgba(139, 92, 246, 0.4));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
     pointer-events: none;
   }

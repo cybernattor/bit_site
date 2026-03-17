@@ -10,22 +10,22 @@ export interface Props {
 const { title, description, iconColor, iconBgColor } = Astro.props;
 ---
 
-<div class="glass-effect rounded-xl p-5 md:p-6 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition-all duration-300 group h-full">
-  <div class="flex items-center space-x-3 mb-4">
+<div class="glass-effect rounded-xl p-4 sm:p-5 md:p-6 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition-all duration-300 group h-full">
+  <div class="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
     {iconBgColor ? (
-      <div class={`w-16 h-16 bg-gradient-to-br transition-transform duration-300 group-hover:scale-110 ${iconBgColor} rounded-lg flex items-center justify-center mx-auto mb-4`}>
+      <div class={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br transition-transform duration-300 group-hover:scale-110 ${iconBgColor} rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4`}>
         <slot name="icon" />
       </div>
     ) : (
-      <span class={`w-8 h-8 transition-transform duration-300 group-hover:scale-110 ${iconColor}`}>
+      <span class={`w-6 h-6 sm:w-8 sm:h-8 transition-transform duration-300 group-hover:scale-110 ${iconColor}`}>
         <slot name="icon" />
       </span>
     )}
-    {!iconBgColor && <h3 class="text-xl font-semibold text-slate-900 dark:text-white font-display group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">{title}</h3>}
+    {!iconBgColor && <h3 class="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white font-display group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">{title}</h3>}
   </div>
-  {iconBgColor && <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 font-display text-center">{title}</h3>}
-  
+  {iconBgColor && <h3 class="text-base sm:text-lg font-semibold text-slate-900 dark:text-white mb-2 font-display text-center">{title}</h3>}
+
   <slot>
-    {description && <p class={`text-slate-600 dark:text-slate-300 ${iconBgColor ? 'text-sm font-light text-center' : 'leading-relaxed font-light'}`}>{description}</p>}
+    {description && <p class={`text-sm sm:text-base text-slate-600 dark:text-slate-300 ${iconBgColor ? 'font-light text-center' : 'leading-relaxed font-light'}`}>{description}</p>}
   </slot>
 </div>

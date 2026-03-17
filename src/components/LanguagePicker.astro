@@ -10,10 +10,10 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
 const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
 ---
 
-<div class="relative inline-block text-left" id="lang-picker-container">
+<div class="relative inline-block text-left" id="lang-picker-container" style="z-index: 9998;">
   <button
     type="button"
-    class="inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200 min-h-[44px] min-w-[44px]"
+    class="inline-flex items-center justify-center p-2.5 rounded-lg text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200 min-h-[44px] min-w-[44px] shadow-sm"
     id="lang-menu-button"
     aria-expanded="false"
     aria-haspopup="true"
@@ -29,7 +29,7 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
 
   <div
     id="lang-dropdown"
-    class="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 dark:divide-slate-700 opacity-0 invisible transition-all duration-200 z-50 transform scale-95 pointer-events-none"
+    class="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 dark:divide-slate-700 opacity-0 invisible transition-all duration-200 z-[9999] transform scale-95 pointer-events-none"
     role="menu"
     aria-orientation="vertical"
     aria-labelledby="lang-menu-button"

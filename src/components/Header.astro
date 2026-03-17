@@ -28,9 +28,13 @@ const translate = translatePath(Astro.url);
         <ThemeToggle />
       </div>
       <!-- Mobile menu buttons -->
-      <div class="md:hidden flex items-center space-x-4">
-        <LanguagePicker />
-        <ThemeToggle />
+      <div class="md:hidden flex items-center space-x-3">
+        <div class="p-1">
+          <LanguagePicker />
+        </div>
+        <div class="p-1">
+          <ThemeToggle />
+        </div>
         <button class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors min-h-[44px] min-w-[44px] p-2" id="mobile-menu-btn" aria-label="Toggle menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>

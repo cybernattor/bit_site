@@ -1,0 +1,216 @@
+---
+interface Props {
+  size?: 'normal' | 'mini' | 'minimal';
+  animation?: boolean;
+  showClose?: boolean;
+  message?: string;
+  targetDate?: string;
+  linkUrl?: string;
+}
+
+const { 
+  size = 'normal', 
+  animation = true, 
+  showClose = true, 
+  message = 'Special offer ending in',
+  targetDate = '2026-09-01T00:00:00',
+  linkUrl = 'https://cybernattor.github.io'
+} = Astro.props;
+
+// Generate unique ID for this banner instance
+const bannerId = `banner-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div 
+  id={bannerId}
+  class="countdown-banner"
+  data-size={size}
+  data-target-date={targetDate}
+  data-message={message}
+  data-link={linkUrl}
+  data-animation={animation ? 'on' : 'off'}
+  data-show-close={showClose ? 'on' : 'off'}
+>
+  <a href={linkUrl} target="_blank" rel="noopener" class="banner-link">
+    <span class="banner-message">{message}</span>
+    {size !== 'minimal' && <br />}
+    <span class="countdown-timer">Loading...</span>
+  </a>
+  {showClose && (
+    <button class="banner-close" aria-label="Close">×</button>
+  )}
+</div>
+
+<style>
+  .countdown-banner {
+    position: relative;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(180deg, #d32f2f 0%, #b71c1c 100%);
+    border-bottom: 4px solid #801313;
+    color: #fff;
+    font-family: 'Arial Black', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 
+      0px 1px 0px #9e1a1a,
+      0px 2px 0px #8a1515,
+      0px 3px 0px #751111,
+      0px 4px 0px #5e0d0d,
+      0px 6px 10px rgba(0,0,0,0.5);
+    padding: 0.5rem 2.5rem;
+    line-height: 1.6;
+    box-sizing: border-box;
+  }
+
+  .countdown-banner[data-size="mini"] {
+    border-bottom: 2px solid #801313;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    text-shadow: 
+      0px 1px 0px #9e1a1a,
+      0px 2px 0px #8a1515,
+      0px 3px 5px rgba(0,0,0,0.4);
+    padding: 0.25rem 1.5rem;
+    line-height: 1.4;
+  }
+
+  .countdown-banner[data-size="minimal"] {
+    border-bottom: 2px solid #801313;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    text-shadow: 
+      0px 1px 0px #9e1a1a,
+      0px 2px 0px #8a1515,
+      0px 3px 5px rgba(0,0,0,0.4);
+    padding: 0.25rem 1.5rem;
+    line-height: 1.4;
+  }
+
+  .countdown-banner[data-animation="on"] {
+    animation: banner-pulse 2s infinite;
+  }
+
+  .countdown-banner[data-animation="off"] {
+    animation: none;
+  }
+
+  @keyframes banner-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(211, 47, 47, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
+  }
+
+  .banner-link {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .banner-link:hover {
+    text-decoration: underline;
+  }
+
+  .banner-close {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 0.8em;
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 0.25rem 0.5rem;
+    line-height: 1;
+    text-shadow: none;
+  }
+
+  .banner-close:hover {
+    opacity: 1;
+  }
+
+  .countdown-banner[data-size="minimal"] .banner-message::after {
+    content: " ";
+  }
+</style>
+
+<script define:vars={{ bannerId }}>
+  // Countdown logic
+  function initCountdown() {
+    const banner = document.getElementById(bannerId);
+    if (!banner) return;
+
+    const targetDate = new Date(banner.dataset.targetDate || '2026-09-01T00:00:00').getTime();
+    const timerElement = banner.querySelector('.countdown-timer');
+    const closeButton = banner.querySelector('.banner-close');
+    
+    // Check if previously dismissed
+    const storageKey = `banner-hidden-${bannerId}`;
+    const dismissDays = 30;
+    
+    if (banner.dataset.showClose === 'on') {
+      try {
+        const dismissed = localStorage.getItem(storageKey);
+        if (dismissed) {
+          const elapsed = Date.now() - Number(dismissed);
+          if (elapsed < dismissDays * 24 * 60 * 60 * 1000) {
+            banner.style.display = 'none';
+            return;
+          }
+          localStorage.removeItem(storageKey);
+        }
+      } catch (e) {}
+    }
+
+    // Close button handler
+    if (closeButton) {
+      closeButton.addEventListener('click', () => {
+        banner.style.display = 'none';
+        try {
+          localStorage.setItem(storageKey, String(Date.now()));
+        } catch (e) {}
+      });
+    }
+
+    // Countdown update function
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        timerElement.textContent = 'Expired';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      const parts = [];
+      if (days > 0) parts.push(`${days}d`);
+      if (parts.length > 0 || hours > 0) parts.push(`${hours}h`);
+      if (parts.length > 0 || minutes > 0) parts.push(`${minutes}m`);
+      parts.push(`${seconds}s`);
+
+      timerElement.textContent = parts.join(' ');
+    }
+
+    // Start countdown
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCountdown);
+  } else {
+    initCountdown();
+  }
+
+  // Re-initialize after Astro page transitions
+  document.addEventListener('astro:after-swap', initCountdown);
+</script>

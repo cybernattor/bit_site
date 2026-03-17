@@ -2,7 +2,6 @@
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import CountdownBanner from '../components/CountdownBanner.astro';
 import { Image } from 'astro:assets';
 import favicon from '../../public/favicon.svg';
 import { getLangFromUrl } from '../i18n/utils';
@@ -127,9 +126,6 @@ const jsonLd = schema || defaultSchema;
     </script>
 	</head>
 	<body class="bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-[Inter,sans-serif] antialiased transition-colors duration-300">
-		<!-- Countdown Banner -->
-		<CountdownBanner />
-
 		<div class="min-h-screen flex flex-col">
 			<!-- Header Component -->
 			<Header />
@@ -188,10 +184,33 @@ const jsonLd = schema || defaultSchema;
 			setupRevealObserver();
 			setupCursorGlow();
 
+			// Load Keep Android Open banner on initial page load
+			const initialScript = document.createElement('script');
+			initialScript.src = 'https://keepandroidopen.org/banner.js?size=mini';
+			initialScript.id = 'kao-banner-script';
+			document.body.insertBefore(initialScript, document.body.firstChild);
+
 			// Re-setup after View Transitions
 			document.addEventListener('astro:after-swap', () => {
 				setupRevealObserver();
 				setupCursorGlow();
+
+				// Clean up any existing banners and scripts
+				const existingScript = document.getElementById('kao-banner-script');
+				if (existingScript) {
+					existingScript.remove();
+				}
+
+				// Remove all existing banners
+				document.querySelectorAll('.kao-banner').forEach(banner => banner.remove());
+
+				// Load banner after a small delay to ensure DOM is ready
+				setTimeout(() => {
+					const newScript = document.createElement('script');
+					newScript.src = 'https://keepandroidopen.org/banner.js?size=mini';
+					newScript.id = 'kao-banner-script';
+					document.body.insertBefore(newScript, document.body.firstChild);
+				}, 100);
 			});
 		</script>
 	</body>

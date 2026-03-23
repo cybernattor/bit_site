@@ -3,15 +3,18 @@ import Layout from '../../layouts/Layout.astro';
 import AppCard from '../../components/AppCard.astro';
 import Button from '../../components/Button.astro';
 import FeatureCard from '../../components/FeatureCard.astro';
+import { Image } from 'astro:assets';
+import favicon from '../../../public/favicon.svg';
 import { useTranslations } from '../../i18n/utils';
 import { fetchLatestRelease } from '../../utils/github';
 
 const t = useTranslations('en');
 
 const release = await fetchLatestRelease('cybernattor/bit-hub', 'en');
+const downloadUrl = release?.url || '/en/bit-hub';
 
-const title = 'bit Technologies — Ecosystem of convenient apps';
-const description = 'bit Technologies develops native, fast, and private Android applications. No telemetry, no ads.';
+const title = 'bit Technologies - Ecosystem of convenient apps';
+const description = 'bit Technologies develops native, fast, and private Android applications. No telemetry and no ads.';
 
 const schema = {
 	"@context": "https://schema.org",
@@ -23,180 +26,394 @@ const schema = {
 ---
 
 <Layout title={title} description={description} schema={schema}>
-	<!-- Hero Section -->
-	<section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
-		<div class="container mx-auto px-4 py-16 md:py-24">
+	<section class="relative overflow-hidden min-h-[90vh] flex items-center mesh-gradient bg-white dark:bg-slate-950 transition-colors duration-500">
+		<div class="container mx-auto px-4 py-20 md:py-32">
 			<div class="text-center max-w-4xl mx-auto z-10 relative">
-				<div class="mb-6" style="view-transition-name: hero-logo;">
-					<img src="/favicon.svg" alt="bit Tecnologies" class="w-20 h-20 mx-auto mb-6 drop-shadow-lg" />
+				<div class="mb-8 reveal" style="view-transition-name: hero-logo;">
+					<div class="relative inline-flex items-center justify-center">
+						<Image src={favicon} alt="bit Tecnologies" class="w-24 h-24 drop-shadow-2xl animate-float relative z-10" />
+						<div class="absolute w-36 h-36 border border-blue-500/5 rounded-full animate-spin-slow -z-10"></div>
+						<div class="absolute w-44 h-44 border border-emerald-500/3 rounded-full animate-spin-slow -z-10" style="animation-direction: reverse; animation-duration: 25s;"></div>
+					</div>
 				</div>
-				<h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-emerald-600 dark:from-blue-500 dark:to-emerald-500 bg-clip-text text-transparent animate-pulse font-display drop-shadow-sm">
-					bit Tecnologies
+
+				<h1 class="text-5xl md:text-7xl font-extrabold mb-4 text-gradient font-display reveal stagger-1">
+					{t('hero.title')}
 				</h1>
-				<p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed font-light transition-colors">
+				<p class="text-lg md:text-2xl text-slate-500 dark:text-slate-400 mb-2 font-light reveal stagger-2">
+					{t('hero.tagline')}
+				</p>
+				<p class="text-base md:text-lg text-slate-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed font-light reveal stagger-3">
 					{t('hero.subtitle')}
 				</p>
-				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-					<Button href="#download" variant="primary" download>
-						<svg class="w-5 h-5 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
+
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal stagger-4">
+					<Button href={downloadUrl} variant="primary" download>
+						<svg class="w-5 h-5 drop-shadow animate-bounce-subtle" fill="currentColor" viewBox="0 0 24 24">
 							<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
 						</svg>
 						<span>{t('hero.download_hub')}</span>
 					</Button>
 					<Button href="/en/about" variant="outline">
-						{t('nav.about')}
+						{t('hero.about_company')}
+					</Button>
+					<Button href="#apps" variant="ghost">
+						{t('hero.apps_catalog')}
 					</Button>
 				</div>
 			</div>
 		</div>
-		<!-- Decorative gradient -->
-		<div class="absolute inset-0 bg-gradient-to-t from-blue-500/5 to-transparent pointer-events-none"></div>
-		<!-- Animated background elements -->
-		<div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-		<div class="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+
+		<div class="absolute top-10 left-10 w-80 h-80 bg-gradient-to-br from-blue-500/15 to-cyan-500/10 rounded-full blur-3xl animate-float pointer-events-none"></div>
+		<div class="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-br from-emerald-500/15 to-teal-500/10 rounded-full blur-3xl animate-float-delayed pointer-events-none"></div>
+		<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-violet-500/5 to-pink-500/5 rounded-full blur-3xl animate-pulse-soft pointer-events-none"></div>
+		<div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 40px 40px;"></div>
 	</section>
 
-	<!-- App Showcase -->
-	<section id="apps" class="py-16 md:py-24 bg-slate-50/50 dark:bg-slate-900/50 transition-colors duration-300">
+	<section class="py-20 md:py-32 relative overflow-hidden bg-slate-50 dark:bg-slate-900/80 transition-colors duration-500">
+		<div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent via-blue-500/50 to-transparent"></div>
+
 		<div class="container mx-auto px-4">
-			<div class="text-center mb-12">
-				<h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white font-display">{t('home.apps')}</h2>
-				<p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-light transition-colors">
-					{t('home.apps_subtitle')}
+			<div class="text-center mb-16 reveal">
+				<span class="inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-wider bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-full mb-4">Advantages</span>
+				<h2 class="text-3xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white font-display">
+					Why <span class="text-gradient">bit Tecnologies</span>?
+				</h2>
+				<p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-light text-lg">
+					We do not just build apps - we build an <strong class="text-slate-800 dark:text-slate-200">ecosystem of trust</strong>
 				</p>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-				<!-- bit Hub Card -->
-        <AppCard
-          href="/en/bit-hub"
-          name="bit Hub"
-          status={{ label: "Beta", color: "emerald" }}
-          description={t('app.bithub_desc')}
-          requirements="Android 10+"
-          size={release?.size || '2.4 MB'}
-          iconImage="/favicon.svg"
-        />
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+				<div class="glass-effect gradient-border rounded-2xl p-8 tilt-card cursor-glow reveal stagger-1 group">
+					<div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 glow-blue">
+						<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z"/>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-display">Complete Privacy</h3>
+					<p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">No telemetry, analytics, or trackers. Your data stays with you. Everything can be verified through open source code.</p>
+				</div>
 
-				<!-- bit Delta Card -->
-        <AppCard
-          href="/en/bit-delta"
-          name="bit Delta"
-          status={{ label: "In Development", color: "blue" }}
-          description={t('app.bitdelta_desc')}
-          requirements="Android 12+"
-          size={release?.size || '~5 MB'}
-          iconBgColor="from-purple-500 to-pink-500"
-        >
-          <svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M13.5,5.5C14.59,5.5 15.5,4.58 15.5,3.5C15.5,2.38 14.59,1.5 13.5,1.5C12.39,1.5 11.5,2.38 11.5,3.5C11.5,4.58 12.39,5.5 13.5,5.5M9.89,19.38L10.89,15L13,17V23H15V15.5L12.89,13.5L13.5,10.5C14.79,12 16.79,13 19,13V11C17.09,11 15.5,10 14.69,8.58L13.69,7C13.29,6.38 12.69,6 12,6C11.69,6 11.5,6.08 11.19,6.19L6,8.28V13H8V9.58L9.79,8.88L8.19,17L3.29,16L2.89,18L9.89,19.38Z"/>
-          </svg>
-        </AppCard>
+				<div class="glass-effect gradient-border rounded-2xl p-8 tilt-card cursor-glow reveal stagger-2 group">
+					<div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 glow-emerald">
+						<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M13,2.03V2.05L13,4.05C17.39,4.59 20.5,8.58 19.96,12.97C19.5,16.61 16.64,19.5 13,19.93V21.93C18.5,21.38 22.5,16.5 21.95,11C21.5,6.25 17.73,2.5 13,2.03M11,2.06C9.05,2.25 7.19,3 5.67,4.26L7.1,5.74C8.22,4.84 9.57,4.26 11,4.06V2.06M4.26,5.67C3,7.19 2.25,9.04 2.05,11H4.05C4.24,9.58 4.8,8.23 5.69,7.1L4.26,5.67M2.06,13C2.26,14.96 3.03,16.81 4.27,18.33L5.69,16.9C4.81,15.77 4.24,14.42 4.06,13H2.06M7.1,18.37L5.67,19.74C7.18,21 9.04,21.79 11,22V20C9.58,19.82 8.23,19.25 7.1,18.37M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-display">Lightning Speed</h3>
+					<p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">Kotlin + Jetpack Compose means native performance. Startup in milliseconds with minimal battery usage.</p>
+				</div>
 
-				<!-- bit Record Card -->
-        <AppCard
-          href="/en/bit-record"
-          name="bit Record"
-          status={{ label: "Planning", color: "yellow" }}
-          description={t('app.bitrecord_desc')}
-          requirements="Android 11+"
-          size="~3 MB"
-          iconBgColor="from-red-500 to-orange-500"
-        >
-          <svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17,10.5V7A1,1 0 0,0 16,6H4A1,1 0 0,0 3,7V17A1,1 0 0,0 4,18H16A1,1 0 0,0 17,17V13.5L21,17.5V6.5L17,10.5Z"/>
-          </svg>
-        </AppCard>
+				<div class="glass-effect gradient-border rounded-2xl p-8 tilt-card cursor-glow reveal stagger-3 group">
+					<div class="w-14 h-14 bg-gradient-to-br from-violet-500 to-purple-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 glow-purple">
+						<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M20.5,11H19V7C19,5.89 18.1,5 17,5H13V3.5A2.5,2.5 0 0,0 10.5,1A2.5,2.5 0 0,0 8,3.5V5H4A2,2 0 0,0 2,7V10.8H3.5C5,10.8 6.2,12 6.2,13.5C6.2,15 5,16.2 3.5,16.2H2V20A2,2 0 0,0 4,22H7.8V20.5C7.8,19 9,17.8 10.5,17.8C12,17.8 13.2,19 13.2,20.5V22H17A2,2 0 0,0 19,20V16H20.5A2.5,2.5 0 0,0 23,13.5A2.5,2.5 0 0,0 20.5,11Z"/>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-display">Lightweight</h3>
+					<p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">Only {release?.size || '~2.4 MB'} with a feature-complete experience. No unnecessary dependencies, only useful functionality.</p>
+				</div>
+
+				<div class="glass-effect gradient-border rounded-2xl p-8 tilt-card cursor-glow reveal stagger-4 group">
+					<div class="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+						<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-display">Open Source</h3>
+					<p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">Source code is published on GitHub. Inspect it, fork it, and contribute improvements - transparency matters.</p>
+				</div>
+
+				<div class="glass-effect gradient-border rounded-2xl p-8 tilt-card cursor-glow reveal stagger-5 group">
+					<div class="w-14 h-14 bg-gradient-to-br from-rose-500 to-pink-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+						<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M21,10.12H14.22L16.96,7.38L14.59,5L8.41,11.18L14.59,17.36L16.96,14.95L14.22,12.21H21V10.12M3,12A9,9 0 0,1 12,3C14.13,3 16.07,3.85 17.5,5.22L19,3.72C17.18,1.88 14.72,0.75 12,0.75A11.25,11.25 0 0,0 0.75,12A11.25,11.25 0 0,0 12,23.25C14.72,23.25 17.18,22.12 19,20.28L17.5,18.78C16.07,20.15 14.13,21 12,21A9,9 0 0,1 3,12Z"/>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-display">Auto Updates</h3>
+					<p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">Background checking and installation of updates keeps you on the latest version with less friction.</p>
+				</div>
+
+				<div class="glass-effect gradient-border rounded-2xl p-8 tilt-card cursor-glow reveal stagger-6 group">
+					<div class="w-14 h-14 bg-gradient-to-br from-sky-500 to-indigo-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+						<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"/>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-display">Zero Ads</h3>
+					<p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">No banners, popups, or embedded advertising. Just a clean interface and full focus on the product.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="absolute -bottom-20 -right-20 w-96 h-96 bg-gradient-to-br from-blue-500/5 to-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+	</section>
+
+	<section class="py-16 bg-white dark:bg-slate-950 transition-colors duration-500 border-y border-slate-100 dark:border-slate-800/50">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto text-center">
+				<div class="reveal stagger-1">
+					<div class="text-4xl md:text-5xl font-extrabold text-gradient font-display mb-2">~2.4</div>
+					<div class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium">MB size</div>
+				</div>
+				<div class="reveal stagger-2">
+					<div class="text-4xl md:text-5xl font-extrabold text-gradient font-display mb-2">0</div>
+					<div class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium">Trackers</div>
+				</div>
+				<div class="reveal stagger-3">
+					<div class="text-4xl md:text-5xl font-extrabold text-gradient font-display mb-2">100%</div>
+					<div class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium">Open source</div>
+				</div>
+				<div class="reveal stagger-4">
+					<div class="text-4xl md:text-5xl font-extrabold text-gradient font-display mb-2">GPLv3</div>
+					<div class="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium">License</div>
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- Android Compatibility -->
-	<section id="compatibility" class="py-16 md:py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
+	<section class="py-16 relative overflow-hidden bg-gradient-to-br from-blue-50 to-emerald-50 dark:from-slate-800/50 dark:to-slate-900/50 transition-colors duration-500">
+		<div class="container mx-auto px-4">
+			<div class="text-center max-w-4xl mx-auto reveal">
+				<h2 class="text-3xl md:text-4xl font-bold mb-6 text-slate-900 dark:text-white font-display">
+					Ready to try native performance?
+				</h2>
+				<p class="text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto font-light">
+					Join users who already appreciate privacy, speed, and a cleaner Android experience without telemetry or ads.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+					<Button href={downloadUrl} variant="primary" download>
+						<svg class="w-5 h-5 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+						</svg>
+						<span>Download bit Hub</span>
+					</Button>
+					<Button href="#apps" variant="outline">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+						</svg>
+						<span>All applications</span>
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="apps" class="py-20 md:py-32 mesh-gradient bg-slate-50 dark:bg-slate-900/50 transition-colors duration-500">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-16 reveal">
+				<span class="inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full mb-4">Products</span>
+				<h2 class="text-3xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white font-display">{t('home.apps')}</h2>
+				<p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-light text-lg">
+					{t('home.apps_subtitle')}
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+				<div class="reveal stagger-1">
+					<AppCard
+						href="/en/bit-hub"
+						name={t('app.bithub')}
+						status={{ label: "Beta", color: "emerald" }}
+						description={t('app.bithub_desc')}
+						requirements="Android 10+"
+						size={release?.size || '~2.4 MB'}
+						iconImage="/favicon.svg"
+					/>
+				</div>
+
+				<div class="reveal stagger-2">
+					<AppCard
+						href="/en/bit-delta"
+						name={t('app.bitdelta')}
+						status={{ label: t('app.in_development'), color: "blue" }}
+						description={t('app.bitdelta_desc')}
+						requirements="Android 12+"
+						size="~5 MB"
+						iconBgColor="from-purple-500 to-pink-500"
+					>
+						<svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M13.5,5.5C14.59,5.5 15.5,4.58 15.5,3.5C15.5,2.38 14.59,1.5 13.5,1.5C12.39,1.5 11.5,2.38 11.5,3.5C11.5,4.58 12.39,5.5 13.5,5.5M9.89,19.38L10.89,15L13,17V23H15V15.5L12.89,13.5L13.5,10.5C14.79,12 16.79,13 19,13V11C17.09,11 15.5,10 14.69,8.58L13.69,7C13.29,6.38 12.69,6 12,6C11.69,6 11.5,6.08 11.19,6.19L6,8.28V13H8V9.58L9.79,8.88L8.19,17L3.29,16L2.89,18L9.89,19.38Z"/>
+						</svg>
+					</AppCard>
+				</div>
+
+				<div class="reveal stagger-3">
+					<AppCard
+						href="/en/bit-record"
+						name={t('app.bitrecord')}
+						status={{ label: t('app.planning'), color: "yellow" }}
+						description={t('app.bitrecord_desc')}
+						requirements="Android 11+"
+						size="~3 MB"
+						iconBgColor="from-red-500 to-orange-500"
+					>
+						<svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M17,10.5V7A1,1 0 0,0 16,6H4A1,1 0 0,0 3,7V17A1,1 0 0,0 4,18H16A1,1 0 0,0 17,17V13.5L21,17.5V6.5L17,10.5Z"/>
+						</svg>
+					</AppCard>
+				</div>
+			</div>
+
+			<div class="text-center mt-12 reveal">
+				<p class="text-slate-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto font-light">
+					Explore our applications and find the one that fits your needs best.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+					<Button href={downloadUrl} variant="primary" download>
+						<svg class="w-5 h-5 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+						</svg>
+						<span>Download bit Hub</span>
+					</Button>
+					<Button href="https://github.com/cybernattor/bit-site" variant="outline" target="_blank" rel="noopener noreferrer">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+						</svg>
+						<span>View on GitHub</span>
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-12 bg-gradient-to-r from-blue-600 to-emerald-600 dark:from-blue-500 dark:to-emerald-500">
+		<div class="container mx-auto px-4 text-center">
+			<h3 class="text-2xl md:text-3xl font-bold text-white mb-4 font-display">
+				Start using bit apps today
+			</h3>
+			<p class="text-blue-100 mb-6 max-w-2xl mx-auto">
+				Join users who care about privacy and performance.
+			</p>
+			<div class="flex flex-col sm:flex-row gap-4 justify-center">
+				<Button href={downloadUrl} variant="primary" download class="bg-white text-blue-600 hover:bg-blue-50">
+					<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+					</svg>
+					<span>Download bit Hub</span>
+				</Button>
+				<Button href="https://github.com/cybernattor/bit-site" variant="outline" class="border-white text-white hover:bg-white hover:text-blue-600">
+					<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+					</svg>
+					<span>GitHub</span>
+				</Button>
+			</div>
+		</div>
+	</section>
+
+	<section id="compatibility" class="py-20 md:py-28 bg-white dark:bg-slate-950 transition-colors duration-500">
 		<div class="container mx-auto px-4">
 			<div class="max-w-4xl mx-auto">
-				<div class="text-center mb-12">
-					<h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white font-display">{t('home.compatibility')}</h2>
-					<p class="text-slate-600 dark:text-slate-400 font-light transition-colors">
+				<div class="text-center mb-16 reveal">
+					<span class="inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-wider bg-violet-100 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 rounded-full mb-4">Devices</span>
+					<h2 class="text-3xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white font-display">{t('home.compatibility')}</h2>
+					<p class="text-slate-600 dark:text-slate-400 font-light text-lg">
 						{t('home.compatibility_subtitle')}
 					</p>
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FeatureCard title={t('home.requirements_title')} iconColor="text-green-500">
-            <svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M9,11H7V13H9V11M13,11H11V13H13V11M17,11H15V13H17V11M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V9H19V20Z"/>
-            </svg>
-						<ul class="space-y-2 text-slate-600 dark:text-slate-300 transition-colors">
-							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-emerald-500 dark:text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
-								</svg>
-								<span>Android 10 (API 29) and higher</span>
-							</li>
-							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-emerald-500 dark:text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
-								</svg>
-								<span>2 GB RAM (recommended)</span>
-							</li>
-							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-emerald-500 dark:text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
-								</svg>
-								<span>ARMv7 or ARM64 architecture</span>
-							</li>
-						</ul>
-          </FeatureCard>
+					<div class="reveal-left">
+						<div class="glass-effect gradient-border rounded-2xl p-8 h-full">
+							<div class="flex items-center space-x-3 mb-6">
+								<div class="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg flex items-center justify-center">
+									<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M9,11H7V13H9V11M13,11H11V13H13V11M17,11H15V13H17V11M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V9H19V20Z"/>
+									</svg>
+								</div>
+								<h3 class="text-xl font-bold text-slate-900 dark:text-white font-display">{t('home.requirements_title')}</h3>
+							</div>
+							<ul class="space-y-3">
+								<li class="flex items-center space-x-3 text-slate-600 dark:text-slate-300">
+									<svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/></svg>
+									<span>Android 10 (API 29) and higher</span>
+								</li>
+								<li class="flex items-center space-x-3 text-slate-600 dark:text-slate-300">
+									<svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/></svg>
+									<span>2 GB RAM (recommended)</span>
+								</li>
+								<li class="flex items-center space-x-3 text-slate-600 dark:text-slate-300">
+									<svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/></svg>
+									<span>ARMv7 or ARM64 architecture</span>
+								</li>
+							</ul>
+						</div>
+					</div>
 
-          <FeatureCard title={t('home.testing_title')} iconColor="text-blue-500">
-            <svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
-            </svg>
-						<ul class="space-y-2 text-slate-600 dark:text-slate-300 transition-colors">
-							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
-								</svg>
-								<span>Tested on Android 16</span>
-							</li>
-							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
-								</svg>
-								<span>Support for budget devices</span>
-							</li>
-							<li class="flex items-center space-x-2">
-								<svg class="w-4 h-4 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-									<path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
-								</svg>
-								<span>Optimization for low-end hardware</span>
-							</li>
-						</ul>
-          </FeatureCard>
+					<div class="reveal-right">
+						<div class="glass-effect gradient-border rounded-2xl p-8 h-full">
+							<div class="flex items-center space-x-3 mb-6">
+								<div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-lg flex items-center justify-center">
+									<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+									</svg>
+								</div>
+								<h3 class="text-xl font-bold text-slate-900 dark:text-white font-display">{t('home.testing_title')}</h3>
+							</div>
+							<ul class="space-y-3">
+								<li class="flex items-center space-x-3 text-slate-600 dark:text-slate-300">
+									<svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/></svg>
+									<span>Tested on Android 16</span>
+								</li>
+								<li class="flex items-center space-x-3 text-slate-600 dark:text-slate-300">
+									<svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/></svg>
+									<span>Support for budget devices</span>
+								</li>
+								<li class="flex items-center space-x-3 text-slate-600 dark:text-slate-300">
+									<svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/></svg>
+									<span>Optimization for older devices</span>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- Download CTA -->
-	<section id="download" class="py-16 md:py-24 bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300 border-t border-slate-200 dark:border-slate-800">
+	<section id="download" class="py-20 md:py-32 relative overflow-hidden mesh-gradient bg-slate-50 dark:bg-slate-900/80 transition-colors duration-500">
 		<div class="container mx-auto px-4">
-			<div class="text-center max-w-3xl mx-auto">
-				<h2 class="text-3xl md:text-4xl font-bold mb-6 text-slate-900 dark:text-white font-display">{t('home.cta_title')}</h2>
-				<p class="text-lg text-slate-600 dark:text-slate-300 mb-8 font-light transition-colors">
-					{t('home.cta_desc')}
-				</p>
-        <Button href="#download" variant="primary" download>
-					<svg class="w-6 h-6 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
-						<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
-					</svg>
-					<span>Download bit Hub</span>
-        </Button>
-				<p class="text-sm text-slate-500 mt-4">
-					File size: {release?.size || '~2.4 MB'} • Requires Android 10+ • {t('home.cta_file_info')}
-				</p>
+			<div class="text-center max-w-3xl mx-auto reveal-scale">
+				<div class="glass-effect gradient-border rounded-3xl p-12 md:p-16">
+					<div class="mb-8">
+						<Image src={favicon} alt="bit Hub" class="w-16 h-16 mx-auto mb-6 animate-bounce-subtle" />
+					</div>
+					<h2 class="text-3xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white font-display">
+						{t('home.cta_title')}
+					</h2>
+					<p class="text-lg text-slate-600 dark:text-slate-300 mb-10 font-light max-w-xl mx-auto">
+						Download bit Hub now and feel the difference of a native approach.
+					</p>
+					<Button href={downloadUrl} variant="primary" download>
+						<svg class="w-6 h-6 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
+						</svg>
+						<span>{t('hero.download_hub')}</span>
+					</Button>
+					<div class="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
+						<Button href="#apps" variant="outline" class="text-sm">
+							<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+							</svg>
+							<span>All applications</span>
+						</Button>
+						<Button href="https://github.com/cybernattor/bit-site" variant="outline" class="text-sm" target="_blank" rel="noopener noreferrer">
+							<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+							</svg>
+							<span>GitHub</span>
+						</Button>
+					</div>
+					<p class="text-sm text-slate-500 dark:text-slate-400 mt-6">
+						File size: {release?.size || '~2.4 MB'} • Android 10+ • {t('home.cta_file_info')}
+					</p>
+				</div>
 			</div>
 		</div>
+
+		<div class="absolute -top-20 -left-20 w-72 h-72 bg-gradient-to-br from-blue-500/10 to-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+		<div class="absolute -bottom-20 -right-20 w-80 h-80 bg-gradient-to-br from-emerald-500/10 to-teal-500/5 rounded-full blur-3xl pointer-events-none"></div>
 	</section>
 </Layout>

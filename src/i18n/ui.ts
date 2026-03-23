@@ -13,7 +13,7 @@ export const ui = {
     'nav.home': 'Вернуться на главную',
     'nav.bithub': 'bit Hub',
     'nav.privacy': 'Политика конфиденциальности',
-    
+
     'hero.title': 'bit Tecnologies',
     'hero.tagline': 'Экосистема удобных приложений',
     'hero.subtitle': 'Создаем нативные Android приложения с высокой производительностью и заботой о пользователях. Минимум зависимостей, максимум оптимизации.',
@@ -27,7 +27,7 @@ export const ui = {
     'home.compatibility_subtitle': 'Наши приложения оптимизированы для работы на широком спектре Android устройств',
     'home.requirements_title': 'Минимальные требования',
     'home.testing_title': 'Тестирование',
-    
+
     'app.bithub': 'bit Hub',
     'app.bithub_desc': 'Альтернатива F-Droid с нативной разработкой. Магазин приложений с фокусом на приватность и производительность.',
     'app.bitdelta': 'bit Delta',
@@ -44,18 +44,27 @@ export const ui = {
     'hub.features_title': 'Ключевые особенности',
     'hub.feature_performance': 'Нативная производительность',
     'hub.feature_performance_desc': 'Написан на Kotlin с нативным UI, работает быстро даже на старых устройствах',
-    'hub.feature_privacy': 'Без telemetry',
+    'hub.feature_privacy': 'Без телеметрии',
     'hub.feature_privacy_desc': 'Никакой аналитики, телеметрии или отслеживания действий пользователей',
     'hub.feature_updates': 'Автоматические обновления',
     'hub.feature_updates_desc': 'Фоновая проверка и установка обновлений без участия пользователя',
     'hub.feature_fdroid': 'F-Droid репозитории',
     'hub.feature_fdroid_desc': 'Полная совместимость с существующими репозиториями F-Droid',
     'hub.interface_title': 'Интерфейс приложения',
+    'hub.screen_main': 'Главный экран',
+    'hub.screen_settings': 'Настройки',
+    'hub.screen_updates': 'Обновления',
     'hub.tech_title': 'Технические детали',
+    'hub.sys_requirements': 'Системные требования',
+    'hub.tech_stack': 'Технологический стек',
     'hub.opensource_title': 'Открытый исходный код',
     'hub.opensource_desc': 'bit Hub распространяется под лицензией GPLv3. Исходный код доступен на GitHub для изучения и внесения вклада.',
     'hub.github_button': 'Посмотреть на GitHub',
-    
+
+    'home.cta_title': 'Готовы попробовать?',
+    'home.cta_desc': 'Скачайте bit Hub прямо сейчас и оцените преимущества нативного Android-приложения',
+    'home.cta_file_info': 'Установка из неизвестных источников',
+
     'footer.company': 'Создаем качественные приложения для вашего удобства и безопасности.',
     'footer.products': 'Продукты',
     'footer.company_info': 'Компания',
@@ -90,6 +99,10 @@ export const ui = {
     'app.bitdelta_desc': 'Pedometer, activity, and health tracking.',
     'app.bitrecord': 'bit Record',
     'app.bitrecord_desc': 'A simple, minimalist service for screen recording.',
+    'app.in_development': 'In Development',
+    'app.planning': 'Planning',
+    'app.download': 'Download',
+    'app.more': 'Details',
 
     'hub.title': 'bit Hub',
     'hub.subtitle': 'Native app store with a focus on privacy',
@@ -103,10 +116,19 @@ export const ui = {
     'hub.feature_fdroid': 'F-Droid Repositories',
     'hub.feature_fdroid_desc': 'Full compatibility with existing F-Droid repositories',
     'hub.interface_title': 'App Interface',
+    'hub.screen_main': 'Main Screen',
+    'hub.screen_settings': 'Settings',
+    'hub.screen_updates': 'Updates',
     'hub.tech_title': 'Technical Details',
+    'hub.sys_requirements': 'System Requirements',
+    'hub.tech_stack': 'Tech Stack',
     'hub.opensource_title': 'Open Source',
     'hub.opensource_desc': 'bit Hub is distributed under the GPLv3 license. The source code is available on GitHub for study and contribution.',
     'hub.github_button': 'View on GitHub',
+
+    'home.cta_title': 'Ready to try?',
+    'home.cta_desc': 'Download bit Hub now and experience the benefits of native Android applications',
+    'home.cta_file_info': 'Installation from unknown sources',
 
     'footer.company': 'Creating quality applications for your convenience and security.',
     'footer.products': 'Products',

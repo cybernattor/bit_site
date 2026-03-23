@@ -10,8 +10,8 @@ const t = useTranslations('en');
 
 const release = await fetchLatestRelease('cybernattor/bit-hub', 'en');
 
-const title = 'bit Tecnologies — Ecosystem of convenient apps';
-const description = 'bit Tecnologies develops native, fast, and private Android applications. No telemetry, no ads.';
+const title = 'bit Technologies — Ecosystem of convenient apps';
+const description = 'bit Technologies develops native, fast, and private Android applications. No telemetry, no ads.';
 
 const schema = {
 	"@context": "https://schema.org",
@@ -41,7 +41,7 @@ const schema = {
 						<svg class="w-5 h-5 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
 							<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
 						</svg>
-						<span>{t('hero.download_hub')} (APK)</span>
+						<span>{t('hero.download_hub')}</span>
 					</Button>
 					<Button href="/en/about" variant="outline">
 						{t('nav.about')}
@@ -123,7 +123,7 @@ const schema = {
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FeatureCard title="Minimum Requirements" iconColor="text-green-500">
+          <FeatureCard title={t('home.requirements_title')} iconColor="text-green-500">
             <svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9,11H7V13H9V11M13,11H11V13H13V11M17,11H15V13H17V11M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V9H19V20Z"/>
             </svg>
@@ -149,7 +149,7 @@ const schema = {
 						</ul>
           </FeatureCard>
 
-          <FeatureCard title="Testing" iconColor="text-blue-500">
+          <FeatureCard title={t('home.testing_title')} iconColor="text-blue-500">
             <svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
             </svg>
@@ -183,9 +183,9 @@ const schema = {
 	<section id="download" class="py-16 md:py-24 bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300 border-t border-slate-200 dark:border-slate-800">
 		<div class="container mx-auto px-4">
 			<div class="text-center max-w-3xl mx-auto">
-				<h2 class="text-3xl md:text-4xl font-bold mb-6 text-slate-900 dark:text-white font-display">Ready to try?</h2>
+				<h2 class="text-3xl md:text-4xl font-bold mb-6 text-slate-900 dark:text-white font-display">{t('home.cta_title')}</h2>
 				<p class="text-lg text-slate-600 dark:text-slate-300 mb-8 font-light transition-colors">
-					Download bit Hub now and experience the benefits of native Android applications
+					{t('home.cta_desc')}
 				</p>
         <Button href="#download" variant="primary" download>
 					<svg class="w-6 h-6 drop-shadow" fill="currentColor" viewBox="0 0 24 24">
@@ -194,7 +194,7 @@ const schema = {
 					<span>Download bit Hub</span>
         </Button>
 				<p class="text-sm text-slate-500 mt-4">
-					File size: {release?.size || '~2.4 MB'} • Requires Android 10+ • Installation from unknown sources
+					File size: {release?.size || '~2.4 MB'} • Requires Android 10+ • {t('home.cta_file_info')}
 				</p>
 			</div>
 		</div>

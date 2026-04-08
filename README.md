@@ -42,8 +42,24 @@ npm run dev
 # Сборка для продакшена
 npm run build
 
+# Продакшн сборка с оптимизациями
+npm run build:prod
+
 # Предпросмотр сборки
 npm run preview
+
+# Анализ бандла
+npm run build:analyze
+
+# Очистка кэша
+npm run clean
+
+# Проверка типов
+npm run type-check
+
+# Линтинг
+npm run lint
+npm run lint:fix
 ```
 
 ### Настройка
@@ -65,11 +81,28 @@ npm run preview
 
 ### Cloudflare Pages
 
+#### Автоматическое развертывание
+
 1. Подключите репозиторий к Cloudflare Pages
-2. Настройте build settings:
-   - **Build command**: `npm run build`
+2. Настройте переменные окружения в Cloudflare Dashboard:
+   - `SITE_URL=https://bit-site-aye.pages.dev`
+   - `SITE_NAME=bit Technologies`
+   - `ENABLE_ANALYTICS=false`
+   - `ENABLE_SITEMAP=true`
+
+3. Настройте билд:
+   - **Build command**: `npm run build:prod`
    - **Build output directory**: `dist`
-3. Deploy!
+
+#### Ручное развертывание
+
+```bash
+# Сборка проекта
+npm run build:prod
+
+# Развертывание через Wrangler
+npx wrangler pages deploy dist
+```
 
 ### Другие платформы
 
@@ -86,6 +119,15 @@ npm run preview
 - SVG иконки вместо шрифтовых иконок
 - Lazy loading для изображений через Astro Image
 - Оптимизированный Tailwind конфиг
+
+### Продакшн оптимизации
+
+- Минификация JavaScript с Terser
+- Удаление console.log в продакшене
+- Оптимизация изображений
+- Кеширование статических ресурсов
+- Разделение кода на чанки (vendor, router, ui)
+- Сжатие и оптимизация бандла
 
 ## Адаптивность
 

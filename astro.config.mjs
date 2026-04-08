@@ -12,15 +12,31 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
+  output: "static",
   vite: {
     build: {
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: ['astro']
+            vendor: ['astro'],
+            router: ['astro:components/client'],
+            ui: ['@astrojs/tailwind']
           }
         }
-      }
+      },
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          pure_funcs: ['console.log', 'console.info', 'console.debug']
+        }
+      },
+      chunkSizeWarningLimit: 1000
     }
-  }
-});
+  },
+  build: {
+    format: 'directory',
+    assets: 'assets'
+  },
+  });

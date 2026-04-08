@@ -29,7 +29,7 @@ const schema = {
 };
 
 // Fetch release info at build time
-const release = await fetchLatestRelease('cybernattor/bit-hub', lang);
+const release = await fetchLatestRelease('cybernattor/bit-hub', lang).catch(() => null);
 const version = release?.version || 'Beta';
 const size = release?.size || '2.4 МБ';
 const downloadUrl = release?.url || '#download';

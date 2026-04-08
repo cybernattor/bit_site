@@ -10,7 +10,7 @@ import { fetchLatestRelease } from '../../utils/github';
 
 const t = useTranslations('en');
 
-const release = await fetchLatestRelease('cybernattor/bit-hub', 'en');
+const release = await fetchLatestRelease('cybernattor/bit-hub', 'en').catch(() => null);
 const downloadUrl = release?.url || '/en/bit-hub';
 
 const title = 'bit Technologies - Ecosystem of convenient apps';

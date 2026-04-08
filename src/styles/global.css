@@ -318,3 +318,47 @@
   from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
   to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
 }
+
+/* ==========================================
+   MOBILE MENU ENHANCEMENTS
+   ========================================== */
+
+/* Improve touch targets on mobile */
+@media (max-width: 768px) {
+  /* Ensure buttons have proper touch targets */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Fix mobile menu z-index stacking */
+  .mobile-menu-fixed {
+    position: relative !important;
+    z-index: 60 !important;
+  }
+
+  /* Improve mobile menu animation */
+  .mobile-menu-animate {
+    transform-origin: top center !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  /* Fix dropdown z-index on mobile */
+  .dropdown-mobile-fix {
+    z-index: 10000 !important;
+  }
+}
+
+/* Prevent text selection on menu buttons */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Improve focus states for accessibility */
+.focus-visible:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}

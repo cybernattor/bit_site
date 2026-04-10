@@ -1,0 +1,352 @@
+---
+import { languages, defaultLang } from '../i18n/ui';
+import { getLangFromUrl, translatePath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+const translate = translatePath(Astro.url);
+
+// Get opposite language for fallback
+const oppositeLang = lang === 'ru' ? 'en' : 'ru';
+const oppositeUrl = translate(currentPath, oppositeLang);
+---
+
+<div class="relative inline-block text-left dropdown-mobile-fix" id="dynamic-lang-picker-container" style="z-index: 9999;">
+  <button
+    type="button"
+    class="inline-flex items-center justify-center p-2.5 rounded-lg text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200 min-h-[44px] min-w-[44px] shadow-sm no-select focus-visible"
+    id="dynamic-lang-menu-button"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    <span class="sr-only">Select Language / Choose Language</span>
+    <span class="flex items-center space-x-1 font-medium text-sm">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+      </svg>
+      <span class="uppercase" id="current-lang-display">{lang}</span>
+    </span>
+  </button>
+
+  <div
+    id="dynamic-lang-dropdown"
+    class="origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 dark:divide-slate-700 opacity-0 invisible transition-all duration-200 z-[10000] transform scale-95 pointer-events-none"
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="dynamic-lang-menu-button"
+    tabindex="-1"
+  >
+    <div class="py-1" role="none">
+      <button
+        type="button"
+        class="lang-option block w-full px-4 py-2 text-left text-sm transition-colors text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white"
+        role="menuitem"
+        tabindex="-1"
+        data-lang="ru"
+        id="dynamic-lang-ru"
+      >
+        RU
+      </button>
+      <button
+        type="button"
+        class="lang-option block w-full px-4 py-2 text-left text-sm transition-colors text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white"
+        role="menuitem"
+        tabindex="-1"
+        data-lang="en"
+        id="dynamic-lang-en"
+      >
+        EN
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Dynamic language picker without page reload
+  // @ts-nocheck
+  let activeMenu = null;
+  let currentLang = 'ru';
+
+  // Translation data (embedded from ui.ts)
+  const translations = {
+    ru: {
+      'nav.about': 'O kompanii',
+      'nav.compatibility': 'Sovmestimost',
+      'nav.download': 'Skachat',
+      'nav.home': 'Vernutsya na glavnuyu',
+      'nav.bithub': 'bit Hub',
+      'nav.privacy': 'Politika konfidentsialnosti',
+      'hero.title': 'bit Tecnologies',
+      'hero.tagline': 'Ekosistema udobnykh prilozheniy',
+      'hero.subtitle': 'Sozdaem nativnye Android prilozheniya s vysokoy proizvoditelnostyu i zabotoy o polzovatelyakh. Minimum zavisimostey, maksimum optimizatsii.',
+      'hero.download_hub': 'Skachat bit Hub (APK)',
+      'hero.about_company': 'O kompanii',
+      'hero.apps_catalog': 'Katalog prilozheniy',
+      'home.apps': 'Nashi prilozheniya',
+      'home.apps_subtitle': 'Nativnye Android prilozheniya, sozdannye s aktsentom na proizvoditelnost i polzovatelskiy opyt',
+      'home.compatibility': 'Sovmestimost',
+      'home.compatibility_subtitle': 'Nashi prilozheniya optimizirovany dlya raboty na shirokom spektre Android ustroystv',
+      'home.requirements_title': 'Minimalnye trebovaniya',
+      'home.testing_title': 'Testirovanie',
+      'app.bithub': 'bit Hub',
+      'app.bithub_desc': 'Alternativa F-Droid s nativnoy razrabotkoy. Magazin prilozheniy s fokusom na privatnost i proizvoditelnost.',
+      'app.bitdelta': 'bit Delta',
+      'app.bitdelta_desc': 'Shagomer, otstrazhivanie aktivnosti i zdorovya.',
+      'app.bitrecord': 'bit Record',
+      'app.bitrecord_desc': 'Prostoy, minimalistic servis dlya zapisi ekrana.',
+      'app.in_development': 'V razrabotke',
+      'app.planning': 'Planirovanie',
+      'app.download': 'Skachat',
+      'app.more': 'Podrobnee'
+    },
+    en: {
+      'nav.about': 'About Us',
+      'nav.compatibility': 'Compatibility',
+      'nav.download': 'Download',
+      'nav.home': 'Back to Home',
+      'nav.bithub': 'bit Hub',
+      'nav.privacy': 'Privacy Policy',
+      'hero.title': 'bit Technologies',
+      'hero.tagline': 'Ecosystem of convenient apps',
+      'hero.subtitle': 'We create native Android apps with high performance and user care. Minimum dependencies, maximum optimization.',
+      'hero.download_hub': 'Download bit Hub (APK)',
+      'hero.about_company': 'About Us',
+      'hero.apps_catalog': 'App Catalog',
+      'home.apps': 'Our Applications',
+      'home.apps_subtitle': 'Native Android apps created with a focus on performance and user experience',
+      'home.compatibility': 'Compatibility',
+      'home.compatibility_subtitle': 'Our apps are optimized to work on a wide range of Android devices',
+      'home.requirements_title': 'Minimum Requirements',
+      'home.testing_title': 'Testing',
+      'app.bithub': 'bit Hub',
+      'app.bithub_desc': 'An alternative to F-Droid with native development. An app store with a focus on privacy and performance.',
+      'app.bitdelta': 'bit Delta',
+      'app.bitdelta_desc': 'Pedometer, activity, and health tracking.',
+      'app.bitrecord': 'bit Record',
+      'app.bitrecord_desc': 'A simple, minimalistic service for screen recording.',
+      'app.in_development': 'In Development',
+      'app.planning': 'Planning',
+      'app.download': 'Download',
+      'app.more': 'More'
+    }
+  };
+
+  function getCurrentLanguage() {
+    try {
+      const stored = localStorage.getItem('user-lang');
+      if (stored && translations[stored]) return stored;
+
+      // Detect browser language
+      const browserLang = navigator.language;
+      const preferredLang = browserLang.toLowerCase().startsWith('en') ? 'en' : 'ru';
+      return translations[preferredLang] ? preferredLang : 'ru';
+    } catch (e) {
+      return 'ru';
+    }
+  }
+
+  window.setLanguage = function(lang) {
+    if (translations[lang] && lang !== currentLang) {
+      currentLang = lang;
+      localStorage.setItem('user-lang', lang);
+
+      // Update global variables
+      window.currentLang = currentLang;
+
+      // Update display
+      const display = document.getElementById('current-lang-display');
+      if (display) display.textContent = lang;
+
+      // Update document language
+      document.documentElement.lang = lang;
+
+      // Update all translatable elements
+      updatePageTranslations();
+
+      // Update URL without reload
+      updateURL(lang);
+
+      // Update button states
+      updateLanguageButtons();
+    }
+  }
+
+  window.updatePageTranslations = function() {
+    // Update elements with data-i18n attribute
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach((element) => {
+      const key = element.getAttribute('data-i18n');
+      if (key && translations[currentLang][key]) {
+        const translatedText = translations[currentLang][key];
+
+        // Handle different element types
+        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+          element.placeholder = translatedText;
+        } else if (element.tagName === 'TITLE') {
+          element.textContent = translatedText;
+        } else {
+          element.textContent = translatedText;
+        }
+      }
+    });
+
+    // Update elements with data-i18n-html attribute (for HTML content)
+    const htmlElements = document.querySelectorAll('[data-i18n-html]');
+    htmlElements.forEach((element) => {
+      const key = element.getAttribute('data-i18n-html');
+      if (key && translations[currentLang][key]) {
+        element.innerHTML = translations[currentLang][key];
+      }
+    });
+
+    // Update elements with data-i18n-placeholder attribute
+    const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+    placeholderElements.forEach((element) => {
+      const key = element.getAttribute('data-i18n-placeholder');
+      if (key && translations[currentLang][key]) {
+        (element as HTMLInputElement | HTMLTextAreaElement).placeholder = translations[currentLang][key];
+      }
+    });
+  }
+
+  function updateURL(lang: 'ru' | 'en') {
+    const currentPath = window.location.pathname;
+    const search = window.location.search;
+    const hash = window.location.hash;
+
+    // Remove existing language prefix
+    const cleanPath = currentPath.replace(/^\/(en|ru)(\/|$)/, '/') || '/';
+
+    // Add new language prefix if not default
+    let newPath = cleanPath;
+    if (lang !== 'ru') {
+      newPath = `/${lang}${cleanPath}`;
+    }
+
+    const newURL = newPath + search + hash;
+
+    // Update URL without reload
+    if (newURL !== window.location.pathname + search + hash) {
+      history.pushState({}, '', newURL);
+    }
+  }
+
+  function updateLanguageButtons() {
+    // Update active state in dropdown
+    const buttons = document.querySelectorAll('.lang-option');
+    buttons.forEach((button) => {
+      const buttonLang = button.getAttribute('data-lang');
+      if (buttonLang === currentLang) {
+        button.classList.add('bg-slate-100', 'dark:bg-slate-700', 'text-purple-600', 'dark:text-purple-400', 'font-semibold');
+        button.classList.remove('text-slate-700', 'dark:text-slate-300');
+      } else {
+        button.classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-purple-600', 'dark:text-purple-400', 'font-semibold');
+        button.classList.add('text-slate-700', 'dark:text-slate-300');
+      }
+    });
+  }
+
+  function handleOutsideClick(e: MouseEvent | TouchEvent) {
+    const container = document.getElementById('dynamic-lang-picker-container');
+    const dropdown = document.getElementById('dynamic-lang-dropdown');
+    const btn = document.getElementById('dynamic-lang-menu-button');
+
+    if (container && dropdown && btn && !container.contains(e.target as Node)) {
+      btn.setAttribute('aria-expanded', 'false');
+      dropdown.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+      dropdown.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+    }
+  }
+
+  window.setupDynamicLangPicker = function() {
+    const container = document.getElementById('dynamic-lang-picker-container');
+    const btn = document.getElementById('dynamic-lang-menu-button');
+    const dropdown = document.getElementById('dynamic-lang-dropdown');
+
+    if (!btn || !dropdown || !container) return;
+
+    // Initialize current language
+    currentLang = getCurrentLanguage() as 'ru' | 'en';
+    const display = document.getElementById('current-lang-display');
+    if (display) display.textContent = currentLang;
+
+    // Update initial state
+    updateLanguageButtons();
+    updatePageTranslations();
+
+    function toggleMenu(show: boolean) {
+      if (btn && dropdown) {
+        btn.setAttribute('aria-expanded', String(show));
+        if (show) {
+          dropdown.classList.remove('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+          dropdown.classList.add('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+        } else {
+          dropdown.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+          dropdown.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+        }
+      }
+    }
+
+    // Handle menu toggle
+    const handleMenuToggle = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      toggleMenu(!isExpanded);
+    };
+
+    // Clean up existing listeners
+    const newBtn = btn.cloneNode(true);
+    if (btn.parentNode) {
+      btn.parentNode.replaceChild(newBtn, btn);
+    }
+
+    newBtn.addEventListener('click', handleMenuToggle);
+    newBtn.addEventListener('touchend', handleMenuToggle);
+
+    // Handle language selection
+    const langButtons = document.querySelectorAll('.lang-option');
+    langButtons.forEach((button) => {
+      const newButton = button.cloneNode(true);
+      if (button.parentNode) {
+        button.parentNode.replaceChild(newButton, button);
+      }
+
+      newButton.addEventListener('click', (e: Event) => {
+        const target = e.target as HTMLElement;
+        const targetLang = target.getAttribute('data-lang') as 'ru' | 'en';
+        if (targetLang) {
+          window.setLanguage(targetLang);
+          toggleMenu(false); // Close menu
+        }
+      });
+
+      newButton.addEventListener('touchend', (e: Event) => {
+        const target = e.target as HTMLElement;
+        const targetLang = target.getAttribute('data-lang') as 'ru' | 'en';
+        if (targetLang) {
+          window.setLanguage(targetLang);
+          toggleMenu(false); // Close menu
+        }
+      });
+    });
+
+    // Global click handler
+    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('touchend', handleOutsideClick);
+  }
+
+  // Make translations globally available
+  window.translations = translations;
+  window.currentLang = currentLang;
+
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', window.setupDynamicLangPicker);
+  } else {
+    window.setupDynamicLangPicker();
+  }
+
+  // Re-setup after Astro view transitions
+  document.addEventListener('astro:after-swap', window.setupDynamicLangPicker);
+</script>

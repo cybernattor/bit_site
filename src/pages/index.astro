@@ -68,13 +68,13 @@ const schema = {
 					</div>
 				</div>
 
-				<h1 class="text-5xl md:text-7xl font-extrabold mb-4 text-gradient font-display reveal stagger-1">
+				<h1 class="text-5xl md:text-7xl font-extrabold mb-4 text-gradient font-display reveal stagger-1" data-i18n="hero.title">
 					{t('hero.title')}
 				</h1>
-				<p class="text-lg md:text-2xl text-slate-500 dark:text-slate-400 mb-2 font-light reveal stagger-2">
+				<p class="text-lg md:text-2xl text-slate-500 dark:text-slate-400 mb-2 font-light reveal stagger-2" data-i18n="hero.tagline">
 					{t('hero.tagline')}
 				</p>
-				<p class="text-base md:text-lg text-slate-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed font-light reveal stagger-3">
+				<p class="text-base md:text-lg text-slate-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed font-light reveal stagger-3" data-i18n="hero.subtitle">
 					{t('hero.subtitle')}
 				</p>
 
@@ -83,13 +83,13 @@ const schema = {
 						<svg class="w-5 h-5 drop-shadow animate-bounce-subtle" fill="currentColor" viewBox="0 0 24 24">
 							<path d="M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14l-4-4h3V9h2v4h3l-4 4z"/>
 						</svg>
-						<span>{t('hero.download_hub')}</span>
+						<span data-i18n="hero.download_hub">{t('hero.download_hub')}</span>
 					</Button>
 					<Button href={translate('/about')} variant="outline">
-						{t('hero.about_company')}
+						<span data-i18n="hero.about_company">{t('hero.about_company')}</span>
 					</Button>
 					<Button href="#apps" variant="ghost">
-						{t('hero.apps_catalog')}
+						<span data-i18n="hero.apps_catalog">{t('hero.apps_catalog')}</span>
 					</Button>
 				</div>
 			</div>

@@ -136,6 +136,59 @@ const jsonLd = schema || defaultSchema;
 			<Footer />
 		</div>
 
+		<!-- Dynamic Translation System -->
+		<script>
+			// @ts-nocheck
+			// Initialize dynamic translations on page load
+			function initializeDynamicTranslations() {
+				// Update all elements with data-i18n attributes
+				const elements = document.querySelectorAll('[data-i18n]');
+				elements.forEach(element => {
+					const key = element.getAttribute('data-i18n');
+					if (key && window.translations && window.currentLang && window.translations[window.currentLang] && window.translations[window.currentLang][key]) {
+						const translatedText = window.translations[window.currentLang][key];
+
+						// Handle different element types
+						if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+							element.placeholder = translatedText;
+						} else if (element.tagName === 'TITLE') {
+							element.textContent = translatedText;
+						} else {
+							element.textContent = translatedText;
+						}
+					}
+				});
+
+				// Update elements with data-i18n-html attribute
+				const htmlElements = document.querySelectorAll('[data-i18n-html]');
+				htmlElements.forEach(element => {
+					const key = element.getAttribute('data-i18n-html');
+					if (key && window.translations && window.currentLang && window.translations[window.currentLang] && window.translations[window.currentLang][key]) {
+						element.innerHTML = window.translations[window.currentLang][key];
+					}
+				});
+
+				// Update elements with data-i18n-placeholder attribute
+				const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+				placeholderElements.forEach(element => {
+					const key = element.getAttribute('data-i18n-placeholder');
+					if (key && window.translations && window.currentLang && window.translations[window.currentLang] && window.translations[window.currentLang][key]) {
+						element.placeholder = window.translations[window.currentLang][key];
+					}
+				});
+			}
+
+			// Initialize on DOM content loaded
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initializeDynamicTranslations);
+			} else {
+				initializeDynamicTranslations();
+			}
+
+			// Re-initialize after Astro view transitions
+			document.addEventListener('astro:after-swap', initializeDynamicTranslations);
+		</script>
+
 		<!-- Scroll Reveal Observer -->
 		<script>
 		let currentObserver: IntersectionObserver | null = null;

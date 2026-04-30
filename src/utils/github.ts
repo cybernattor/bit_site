@@ -53,7 +53,7 @@ export async function fetchLatestRelease(repo: string, lang: string = 'ru'): Pro
 
     return {
       version: data.tag_name || data.name || 'Latest',
-      url: data.html_url || `https://github.com/${repo}/releases/latest`,
+      url: apkAsset?.browser_download_url || data.html_url || `https://github.com/${repo}/releases/latest`,
       size: sizeStr,
       publishedAt: data.published_at ? new Date(data.published_at).toLocaleDateString(locale, {
         year: 'numeric',

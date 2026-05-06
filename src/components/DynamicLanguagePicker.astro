@@ -67,71 +67,13 @@ const oppositeUrl = translate(currentPath, oppositeLang);
   let activeMenu = null;
   let currentLang = 'ru';
 
-  // Translation data (embedded from ui.ts)
-  const translations = {
-    ru: {
-      'nav.about': 'О компании',
-      'nav.compatibility': 'Совместимость',
-      'nav.download': 'Скачать',
-      'nav.home': 'Вернуться на главную',
-      'nav.bithub': 'bit Hub',
-      'nav.privacy': 'Политика конфиденциальности',
-      'hero.title': 'bit Tecnologies',
-      'hero.tagline': 'Экосистема удобных приложений',
-      'hero.subtitle': 'Создаем нативные Android приложения с высокой производительностью и заботой о пользователях. Минимум зависимостей, максимум оптимизации.',
-      'hero.download_hub': 'Скачать bit Hub (APK)',
-      'hero.about_company': 'О компании',
-      'hero.apps_catalog': 'Каталог приложений',
-      'home.apps': 'Наши приложения',
-      'home.apps_subtitle': 'Нативные Android приложения, созданные с акцентом на производительность и пользовательский опыт',
-      'home.compatibility': 'Совместимость',
-      'home.compatibility_subtitle': 'Наши приложения оптимизированы для работы на широком спектре Android устройств',
-      'home.requirements_title': 'Минимальные требования',
-      'home.testing_title': 'Тестирование',
-      'app.bithub': 'bit Hub',
-      'app.bithub_desc': 'Альтернатива F-Droid с нативной разработкой. Магазин приложений с фокусом на приватность и производительность.',
-      'app.bitdelta': 'bit Delta',
-      'app.bitdelta_desc': 'Шагомер, отслеживание активности и здоровья.',
-      'app.bitrecord': 'bit Record',
-      'app.bitrecord_desc': 'Простой, минималистичный сервис для записи экрана.',
-      'app.in_development': 'В разработке',
-      'app.planning': 'Планирование',
-      'app.download': 'Скачать',
-      'app.more': 'Подробнее'
-    },
-    en: {
-      'nav.about': 'About Us',
-      'nav.compatibility': 'Compatibility',
-      'nav.download': 'Download',
-      'nav.home': 'Back to Home',
-      'nav.bithub': 'bit Hub',
-      'nav.privacy': 'Privacy Policy',
-      'hero.title': 'bit Technologies',
-      'hero.tagline': 'Ecosystem of convenient apps',
-      'hero.subtitle': 'We create native Android apps with high performance and user care. Minimum dependencies, maximum optimization.',
-      'hero.download_hub': 'Download bit Hub (APK)',
-      'hero.about_company': 'About Us',
-      'hero.apps_catalog': 'App Catalog',
-      'home.apps': 'Our Applications',
-      'home.apps_subtitle': 'Native Android apps created with a focus on performance and user experience',
-      'home.compatibility': 'Compatibility',
-      'home.compatibility_subtitle': 'Our apps are optimized to work on a wide range of Android devices',
-      'home.requirements_title': 'Minimum Requirements',
-      'home.testing_title': 'Testing',
-      'app.bithub': 'bit Hub',
-      'app.bithub_desc': 'An alternative to F-Droid with native development. An app store with a focus on privacy and performance.',
-      'app.bitdelta': 'bit Delta',
-      'app.bitdelta_desc': 'Pedometer, activity, and health tracking.',
-      'app.bitrecord': 'bit Record',
-      'app.bitrecord_desc': 'A simple, minimalistic service for screen recording.',
-      'app.in_development': 'In Development',
-      'app.planning': 'Planning',
-      'app.download': 'Download',
-      'app.more': 'More'
-    }
-  };
+  // Use global translations from window.translations (set by Layout.astro)
+  function getTranslations() {
+    return window.translations || {};
+  }
 
   function getCurrentLanguage() {
+    const translations = getTranslations();
     try {
       const stored = localStorage.getItem('user-lang');
       if (stored && translations[stored]) return stored;
@@ -146,6 +88,7 @@ const oppositeUrl = translate(currentPath, oppositeLang);
   }
 
   window.setLanguage = function(lang) {
+    const translations = getTranslations();
     if (translations[lang] && lang !== currentLang) {
       currentLang = lang;
       localStorage.setItem('user-lang', lang);
@@ -172,11 +115,12 @@ const oppositeUrl = translate(currentPath, oppositeLang);
   }
 
   window.updatePageTranslations = function() {
+    const translations = getTranslations();
     // Update elements with data-i18n attribute
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach((element) => {
       const key = element.getAttribute('data-i18n');
-      if (key && translations[currentLang][key]) {
+      if (key && translations[currentLang] && translations[currentLang][key]) {
         const translatedText = translations[currentLang][key];
 
         // Handle different element types

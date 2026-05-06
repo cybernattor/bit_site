@@ -1,4 +1,5 @@
 // Client-side i18n utilities for dynamic translation
+import React from 'react';
 import { ui, defaultLang, languages } from './ui';
 
 export type Language = keyof typeof ui;

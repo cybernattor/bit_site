@@ -1,5 +1,6 @@
 # dependencies
 node_modules/
+.pnpm-store/
 
 # build output
 dist/
@@ -16,20 +17,64 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
 # caches
 .cache/
 .vite/
 coverage/
+.nyc_output/
+.temp/
+.tmp/
 
 # deployment platforms
 .vercel/
 .netlify/
+.cloudflare/
+.firebase/
+
+# PWA related
+sw.js
+sw.js.map
+workbox-*.js
+manifest.json
 
 # editor settings
 .idea/
 .vscode/settings.json
+.vscode/extensions.json
+*.swp
+*.swo
+*~
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# testing
+coverage/
+.nyc_output/
+junit.xml
+
+# misc
+*.tgz
+*.tar.gz
+.npm
+.eslintcache
+
+# AI agent folders
+.agents/
+.claude/
+.codex/
+.kiro/
+skills-lock.json

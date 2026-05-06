@@ -281,7 +281,7 @@ const oppositeUrl = translate(currentPath, oppositeLang);
   }
 
   // Make translations globally available
-  window.translations = translations;
+  window.translations = getTranslations();
   window.currentLang = currentLang;
 
   // Initialize on load

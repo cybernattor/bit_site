@@ -27,7 +27,7 @@
     }
 
     // Handle both click and touch events for mobile compatibility
-    const handleThemeToggle = (e: MouseEvent | TouchEvent) => {
+    const handleThemeToggle = (e: Event) => {
       e.preventDefault();
       const isCurrentlyDark = document.documentElement.classList.contains('dark');
 

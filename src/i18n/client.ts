@@ -1,5 +1,4 @@
 // Client-side i18n utilities for dynamic translation
-import React from 'react';
 import { ui, defaultLang, languages } from './ui';
 
 export type Language = keyof typeof ui;
@@ -106,22 +105,21 @@ class I18nClient {
 // Global instance
 export const i18nClient = new I18nClient();
 
-// React-like hook for components
-export function useTranslation() {
-  const [, forceUpdate] = React.useState({});
+// Simple state management for vanilla JS
+let stateUpdateTrigger = 0;
 
-  React.useEffect(() => {
-    const unsubscribe = i18nClient.subscribe(() => {
-      forceUpdate({});
-    });
-    return unsubscribe;
-  }, []);
+// React-like hook for components (vanilla JS version)
+export function useTranslation() {
+  const unsubscribe = i18nClient.subscribe(() => {
+    stateUpdateTrigger++;
+  });
 
   return {
     t: (key: TranslationKey) => i18nClient.translate(key),
     lang: i18nClient.getCurrentLang(),
     setLanguage: (lang: Language) => i18nClient.setLanguage(lang),
-    languages: i18nClient.getLanguages()
+    languages: i18nClient.getLanguages(),
+    unsubscribe
   };
 }
 
@@ -159,8 +157,3 @@ if (typeof window !== 'undefined') {
   document.addEventListener('astro:after-swap', updatePageTranslations);
 }
 
-// React namespace declaration for TypeScript
-declare namespace React {
-  function useState<T>(initialValue: T): [T, (value: T) => void];
-  function useEffect(effect: () => void | (() => void), deps?: any[]): void;
-}

@@ -8,10 +8,10 @@ interface Props {
   linkUrl?: string;
 }
 
-const { 
-  size = 'normal', 
-  animation = true, 
-  showClose = true, 
+const {
+  size = 'normal',
+  animation = true,
+  showClose = true,
   message = 'Special offer ending in',
   targetDate = '2026-09-01T00:00:00',
   linkUrl = 'https://cybernattor.github.io'
@@ -21,7 +21,7 @@ const {
 const bannerId = `banner-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<div 
+<div
   id={bannerId}
   class="countdown-banner"
   data-size={size}
@@ -54,7 +54,7 @@ const bannerId = `banner-${Math.random().toString(36).substr(2, 9)}`;
     letter-spacing: 2px;
     font-size: 1.5rem;
     text-align: center;
-    text-shadow: 
+    text-shadow:
       0px 1px 0px #9e1a1a,
       0px 2px 0px #8a1515,
       0px 3px 0px #751111,
@@ -69,7 +69,7 @@ const bannerId = `banner-${Math.random().toString(36).substr(2, 9)}`;
     border-bottom: 2px solid #801313;
     letter-spacing: 1px;
     font-size: 0.75rem;
-    text-shadow: 
+    text-shadow:
       0px 1px 0px #9e1a1a,
       0px 2px 0px #8a1515,
       0px 3px 5px rgba(0,0,0,0.4);
@@ -81,7 +81,7 @@ const bannerId = `banner-${Math.random().toString(36).substr(2, 9)}`;
     border-bottom: 2px solid #801313;
     letter-spacing: 1px;
     font-size: 0.75rem;
-    text-shadow: 
+    text-shadow:
       0px 1px 0px #9e1a1a,
       0px 2px 0px #8a1515,
       0px 3px 5px rgba(0,0,0,0.4);
@@ -137,7 +137,7 @@ const bannerId = `banner-${Math.random().toString(36).substr(2, 9)}`;
   }
 </style>
 
-<script define:vars={{ bannerId }}>
+<script define:vars={{ bannerId }} is:inline>
   // Countdown logic
   function initCountdown() {
     const banner = document.getElementById(bannerId);
@@ -146,11 +146,11 @@ const bannerId = `banner-${Math.random().toString(36).substr(2, 9)}`;
     const targetDate = new Date(banner.dataset.targetDate || '2026-09-01T00:00:00').getTime();
     const timerElement = banner.querySelector('.countdown-timer');
     const closeButton = banner.querySelector('.banner-close');
-    
+
     // Check if previously dismissed
     const storageKey = `banner-hidden-${bannerId}`;
     const dismissDays = 30;
-    
+
     if (banner.dataset.showClose === 'on') {
       try {
         const dismissed = localStorage.getItem(storageKey);

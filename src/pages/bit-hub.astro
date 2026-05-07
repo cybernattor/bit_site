@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
-import FeatureCard from '../components/FeatureCard.astro';
 import { Image } from 'astro:assets';
 import favicon from '../../public/favicon.svg';
 import { getLangFromUrl, useTranslations, translatePath } from '../i18n/utils';
@@ -14,19 +13,6 @@ const translate = translatePath(Astro.url);
 const title = 'bit Hub — Нативный клиент для GitHub релизов';
 const description = 'bit Hub дает вам доступ к открытым Android-приложениям без ограничений. Нативное приложение на Jetpack Compose.';
 const image = '/og-bit-hub.png';
-
-const schema = {
-	"@context": "https://schema.org",
-	"@type": "SoftwareApplication",
-	"name": "bit Hub",
-	"operatingSystem": "Android",
-	"applicationCategory": "DeveloperApplication",
-	"offers": {
-		"@type": "Offer",
-		"price": "0",
-		"priceCurrency": "USD"
-	}
-};
 
 // Fetch release info at build time
 const release = await fetchLatestRelease('cybernattor/bit-hub', lang).catch(() => null);

@@ -1,6 +1,5 @@
 ---
 import { getLangFromUrl, translatePath } from '../i18n/utils';
-import { ui } from '../i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
@@ -61,9 +60,8 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
 </div>
 
 <script>
-  let activeMenu: HTMLElement | null = null;
 
-  function handleOutsideClick(e: MouseEvent | TouchEvent) {
+  function handleOutsideClick(e: Event) {
     const container = document.getElementById('lang-picker-container');
     const dropdown = document.getElementById('lang-dropdown');
     const btn = document.getElementById('lang-menu-button');
@@ -94,7 +92,7 @@ const oppositeUrl = translatePath(Astro.url)(currentPath, oppositeLang);
     }
 
     // Handle both click and touch events for mobile compatibility
-    const handleMenuToggle = (e: MouseEvent | TouchEvent) => {
+    const handleMenuToggle = (e: Event) => {
       e.preventDefault();
       e.stopPropagation();
       const isExpanded = btn.getAttribute('aria-expanded') === 'true';

@@ -1,10 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
-import { getLangFromUrl, useTranslations, translatePath } from '../i18n/utils';
+import { getLangFromUrl, translatePath } from '../i18n/utils';
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 const translate = translatePath(Astro.url);
 
 const title = 'Политика конфиденциальности — bit Tecnologies';

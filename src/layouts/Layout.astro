@@ -2,7 +2,6 @@
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Image } from 'astro:assets';
 import favicon from '../../public/favicon.svg';
 import { getLangFromUrl } from '../i18n/utils';
 
@@ -53,7 +52,7 @@ const jsonLd = schema || defaultSchema;
 		<meta name="keywords" content="bit Tecnologies, android, privacy, mobile apps, kotlin, jetpack compose" />
 
 		<!-- JSON-LD Schema -->
-		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
 		<!-- Open Graph Tags -->
 		<meta property="og:title" content={title} />

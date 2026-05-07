@@ -1,5 +1,4 @@
 ---
-import { languages, defaultLang } from '../i18n/ui';
 import { getLangFromUrl, translatePath } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -8,7 +7,6 @@ const translate = translatePath(Astro.url);
 
 // Get opposite language for fallback
 const oppositeLang = lang === 'ru' ? 'en' : 'ru';
-const oppositeUrl = translate(currentPath, oppositeLang);
 ---
 
 <div class="relative inline-block text-left dropdown-mobile-fix" id="dynamic-lang-picker-container" style="z-index: 9999;">
@@ -190,7 +188,7 @@ const oppositeUrl = translate(currentPath, oppositeLang);
     });
   }
 
-  function handleOutsideClick(e: MouseEvent | TouchEvent) {
+  function handleOutsideClick(e: Event) {
     const container = document.getElementById('dynamic-lang-picker-container');
     const dropdown = document.getElementById('dynamic-lang-dropdown');
     const btn = document.getElementById('dynamic-lang-menu-button');

@@ -65,7 +65,7 @@ const translate = translatePath(Astro.url);
       btn.parentNode?.replaceChild(newBtn, btn);
 
       // Handle both click and touch events for mobile compatibility
-      const handleMenuToggle = (e: MouseEvent | TouchEvent) => {
+      const handleMenuToggle = (e: Event) => {
         e.preventDefault();
 
         if (menu.classList.contains('hidden')) {
@@ -96,7 +96,7 @@ const translate = translatePath(Astro.url);
         const newLink = link.cloneNode(true);
         link.parentNode?.replaceChild(newLink, link);
 
-        const handleLinkClick = (e: MouseEvent | TouchEvent) => {
+        const handleLinkClick = () => {
           // Hide menu with animation
           menu.classList.remove('scale-y-100', 'opacity-100');
           menu.classList.add('scale-y-0', 'opacity-0');

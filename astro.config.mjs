@@ -59,15 +59,6 @@ export default defineConfig({
   output: "static",
   vite: {
     build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ['astro'],
-            router: ['astro:components/client'],
-            ui: ['@astrojs/tailwind']
-          }
-        }
-      },
       minify: 'terser',
       terserOptions: {
         compress: {
@@ -79,10 +70,6 @@ export default defineConfig({
       chunkSizeWarningLimit: 1000,
       // Optimize assets
       assetsInlineLimit: 4096
-    },
-    // Optimize dependencies
-    optimizeDeps: {
-      include: ['astro', '@astrojs/tailwind']
     }
   },
   build: {

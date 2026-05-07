@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import favicon from '../../public/favicon.svg';
 import { getLangFromUrl } from '../i18n/utils';
+import { ui } from '../i18n/ui';
 
 export interface Props {
 	title: string;
@@ -153,6 +154,12 @@ const jsonLd = schema || defaultSchema;
 		<!-- Dynamic Translation System -->
 		<script>
 			// @ts-nocheck
+			// Make translations globally available
+			window.translations = JSON.parse('{JSON.stringify(ui)}');
+			window.currentLang = '{lang}';
+			console.log('Initialized translations:', Object.keys(window.translations));
+			console.log('Current language set to:', window.currentLang);
+
 			// Initialize dynamic translations on page load
 			function initializeDynamicTranslations() {
 				// Update all elements with data-i18n attributes

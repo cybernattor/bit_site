@@ -73,6 +73,11 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
   function getCurrentLanguage() {
     const translations = getTranslations();
     try {
+      // First check if language is already set globally
+      if (window.currentLang && translations[window.currentLang]) {
+        return window.currentLang;
+      }
+
       const stored = localStorage.getItem('user-lang');
       if (stored && translations[stored]) return stored;
 
@@ -87,12 +92,15 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
 
   window.setLanguage = function(lang) {
     const translations = getTranslations();
+    console.log('setLanguage called with:', lang, 'currentLang:', currentLang);
     if (translations[lang] && lang !== currentLang) {
       currentLang = lang;
       localStorage.setItem('user-lang', lang);
 
       // Update global variables
-      window.currentLang = currentLang;
+      window.currentLang = lang;
+
+      console.log('Updated window.currentLang to:', window.currentLang);
 
       // Update display
       const display = document.getElementById('current-lang-display');
@@ -109,17 +117,28 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
 
       // Update button states
       updateLanguageButtons();
+    } else {
+      console.log('setLanguage blocked - translations[lang]:', translations[lang], 'lang !== currentLang:', lang !== currentLang);
     }
   }
 
   window.updatePageTranslations = function() {
     const translations = getTranslations();
+    console.log('updatePageTranslations called with currentLang:', currentLang);
+    console.log('Available translations keys:', Object.keys(translations));
+    if (translations[currentLang]) {
+      console.log('Current language translations available:', Object.keys(translations[currentLang]));
+    }
+
     // Update elements with data-i18n attribute
     const elements = document.querySelectorAll('[data-i18n]');
+    console.log('Found elements with data-i18n:', elements.length);
+
     elements.forEach((element) => {
       const key = element.getAttribute('data-i18n');
       if (key && translations[currentLang] && translations[currentLang][key]) {
         const translatedText = translations[currentLang][key];
+        console.log(`Translating ${key} to:`, translatedText);
 
         // Handle different element types
         if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
@@ -129,6 +148,8 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
         } else {
           element.textContent = translatedText;
         }
+      } else {
+        console.log(`Failed to translate ${key} - currentLang:`, currentLang, 'has translation:', !!(translations[currentLang] && translations[currentLang][key]));
       }
     });
 

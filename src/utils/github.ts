@@ -36,9 +36,10 @@ export async function fetchLatestRelease(repo: string, lang: string = 'ru'): Pro
       return null;
     }
 
-    // Find first APK asset if available
+    // Find APK asset matching the pattern bithub-X-vX.X.X.X-release.apk
     const apkAsset = data.assets?.find((asset: any) =>
-      asset && typeof asset === 'object' && asset.name && typeof asset.name === 'string' && asset.name.endsWith('.apk')
+      asset && typeof asset === 'object' && asset.name && typeof asset.name === 'string' &&
+      asset.name.match(/^bithub-\d+-v\d+\.\d+\.\d+\.\d+-release\.apk$/)
     );
 
     const sizeUnit = lang === 'en' ? 'MB' : 'МБ';

@@ -77,11 +77,6 @@ export default defineConfig({
     assets: 'assets'
   },
   image: {
-    serviceEntry: true,
     domains: ['cybernattor.github.io']
   },
-  dev: {
-    port: 4321,
-    host: true
-  }
-});
+  });

@@ -1,0 +1,16 @@
+# /robots.txt
+User-agent: *
+Allow: /
+
+# Block admin/private areas (if they exist in future)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Allow search engines to access important resources
+Allow: /src/
+Allow: /public/
+Allow: /assets/
+
+# Comment out sitemap until site is deployed
+# Sitemap: https://cybernattor.github.io/sitemap.xml

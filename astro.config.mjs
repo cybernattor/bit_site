@@ -5,6 +5,8 @@ import VitePWA from '@vite-pwa/astro';
 
 // https://astro.build/config
 export default defineConfig({
+  // Уберем site URL пока сайт не развернут
+  // site: 'https://cybernattor.github.io',
   integrations: [tailwind(), VitePWA({
     registerType: 'autoUpdate',
     workbox: {
@@ -24,9 +26,9 @@ export default defineConfig({
       ],
     },
     manifest: {
-      name: 'BIT Technologies',
-      short_name: 'BIT',
-      description: 'BIT Technologies - Professional Web Development',
+      name: 'bit Tecnologies',
+      short_name: 'bit',
+      description: 'bit Tecnologies - Professional Web Development',
       theme_color: '#000000',
       background_color: '#ffffff',
       display: 'standalone',
@@ -74,11 +76,25 @@ export default defineConfig({
           pure_funcs: ['console.log', 'console.info', 'console.debug']
         }
       },
-      chunkSizeWarningLimit: 1000
+      chunkSizeWarningLimit: 1000,
+      // Optimize assets
+      assetsInlineLimit: 4096
+    },
+    // Optimize dependencies
+    optimizeDeps: {
+      include: ['astro', '@astrojs/tailwind']
     }
   },
   build: {
     format: 'directory',
     assets: 'assets'
   },
-  });
+  image: {
+    serviceEntry: true,
+    domains: ['cybernattor.github.io']
+  },
+  dev: {
+    port: 4321,
+    host: true
+  }
+});

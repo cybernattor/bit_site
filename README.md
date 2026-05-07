@@ -86,7 +86,7 @@ npm run lint:fix
 1. Подключите репозиторий к Cloudflare Pages
 2. Настройте переменные окружения в Cloudflare Dashboard:
    - `SITE_URL=https://bit-site-aye.pages.dev`
-   - `SITE_NAME=bit Technologies`
+   - `SITE_NAME=bit Tecnologies`
    - `ENABLE_ANALYTICS=false`
    - `ENABLE_SITEMAP=true`
 

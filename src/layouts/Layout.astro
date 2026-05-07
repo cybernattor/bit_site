@@ -15,12 +15,12 @@ export interface Props {
 
 const { title, description, image = "/og-bit-hub.svg", schema } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://cybernattor.github.io');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost:4321');
 
 // Build alternate language URLs
 const currentPath = Astro.url.pathname;
-const ruURL = new URL(currentPath.replace(/^\/en\//, '/').replace(/^\/en$/, '/'), Astro.site || 'https://cybernattor.github.io');
-const enURL = new URL(currentPath.startsWith('/en') ? currentPath : `/en${currentPath}`, Astro.site || 'https://cybernattor.github.io');
+const ruURL = new URL(currentPath.replace(/^\/en\//, '/').replace(/^\/en$/, '/'), Astro.site || 'http://localhost:4321');
+const enURL = new URL(currentPath.startsWith('/en') ? currentPath : `/en${currentPath}`, Astro.site || 'http://localhost:4321');
 
 const defaultSchema = {
 	"@context": "https://schema.org",
@@ -48,6 +48,9 @@ const jsonLd = schema || defaultSchema;
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<meta name="robots" content="index, follow, max-snippet:150, max-image-preview:large" />
+		<meta name="author" content="bit Tecnologies" />
+		<meta name="keywords" content="bit Tecnologies, android, privacy, mobile apps, kotlin, jetpack compose" />
 
 		<!-- JSON-LD Schema -->
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -56,9 +59,13 @@ const jsonLd = schema || defaultSchema;
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={image} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="bit Tecnologies Logo" />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'ru_RU'} />
 		<meta property="og:url" content={canonicalURL.href} />
+		<meta property="og:site_name" content="bit Tecnologies" />
 
 		<!-- Canonical & Hreflang -->
 		<link rel="canonical" href={canonicalURL.href} />
@@ -75,7 +82,11 @@ const jsonLd = schema || defaultSchema;
 		<!-- Preconnect to external domains -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+		<!-- Preload critical resources -->
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+		<!-- DNS prefetch for external resources -->
+		<link rel="dns-prefetch" href="https://cybernattor.github.io" />
 
 		<ClientRouter />
 
@@ -123,12 +134,16 @@ const jsonLd = schema || defaultSchema;
     </script>
 	</head>
 	<body class="bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-[Inter,sans-serif] antialiased transition-colors duration-300">
+		<!-- Skip link for keyboard navigation -->
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
+			Перейти к основному содержимому
+		</a>
 		<div class="min-h-screen flex flex-col">
 			<!-- Header Component -->
 			<Header />
 
 			<!-- Main Content -->
-			<main class="flex-1">
+			<main id="main-content" class="flex-1" tabindex="-1">
 				<slot />
 			</main>
 
@@ -215,10 +230,11 @@ const jsonLd = schema || defaultSchema;
 			// Cursor glow effect
 			function setupCursorGlow() {
 				document.querySelectorAll('.cursor-glow').forEach(el => {
-					el.addEventListener('mousemove', (e) => {
+					el.addEventListener('mousemove', (e: Event) => {
+						const mouseEvent = e as MouseEvent;
 						const rect = (el as HTMLElement).getBoundingClientRect();
-						const x = e.clientX - rect.left;
-						const y = e.clientY - rect.top;
+						const x = mouseEvent.clientX - rect.left;
+						const y = mouseEvent.clientY - rect.top;
 						(el as HTMLElement).style.setProperty('--glow-x', `${x}px`);
 						(el as HTMLElement).style.setProperty('--glow-y', `${y}px`);
 						const before = (el as HTMLElement).querySelector('.glow-indicator') as HTMLElement;
@@ -227,7 +243,7 @@ const jsonLd = schema || defaultSchema;
 							before.style.top = `${y}px`;
 						}
 					});
-				});
+			});
 			}
 
 			// Setup on initial load

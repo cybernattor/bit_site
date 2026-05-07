@@ -79,7 +79,7 @@ export const ui = {
     'nav.bithub': 'bit Hub',
     'nav.privacy': 'Privacy Policy',
 
-    'hero.title': 'bit Technologies',
+    'hero.title': 'bit Tecnologies',
     'hero.tagline': 'Ecosystem of convenient apps',
     'hero.subtitle': 'We create native Android apps with high performance and user care. Minimum dependencies, maximum optimization.',
     'hero.download_hub': 'Download bit Hub (APK)',

@@ -11,7 +11,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translate = translatePath(Astro.url);
 
-const release = await fetchLatestRelease('cybernattor/bit-hub', lang).catch(() => null);
+const release = await fetchLatestRelease('cybernattor/bit_hub', lang).catch(() => null);
 const downloadUrl = release?.url || translate('/bit-hub');
 
 const title = 'bit Tecnologies — Экосистема удобных приложений';

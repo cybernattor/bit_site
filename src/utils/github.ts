@@ -13,7 +13,7 @@ export async function fetchLatestRelease(repo: string, lang: string = 'ru'): Pro
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-    const response = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, {
+    const response = await fetch(`https://api.github.com/repos/${repo}/releases`, {
       headers: {
         'Accept': 'application/vnd.github.v3+json',
         'User-Agent': 'bit-tecnologies-website/1.0'
@@ -31,16 +31,32 @@ export async function fetchLatestRelease(repo: string, lang: string = 'ru'): Pro
     const data = await response.json();
 
     // Validate response structure
-    if (!data || typeof data !== 'object') {
+    if (!data || !Array.isArray(data)) {
       console.warn(`Invalid response from GitHub API for ${repo}`);
       return null;
     }
 
-    // Find APK asset matching the pattern bithub-X-vX.X.X.X-release.apk
-    const apkAsset = data.assets?.find((asset: any) =>
-      asset && typeof asset === 'object' && asset.name && typeof asset.name === 'string' &&
-      asset.name.match(/^bithub-\d+-v\d+\.\d+\.\d+\.\d+-release\.apk$/)
-    );
+    // Find the latest release with a matching APK asset
+    let latestRelease = null;
+    let apkAsset = null;
+
+    for (const release of data) {
+      const foundAsset = release.assets?.find((asset: any) =>
+        asset && typeof asset === 'object' && asset.name && typeof asset.name === 'string' &&
+        asset.name.match(/^bithub-\d+-v\d+\.\d+\.\d+\.\d+-release\.apk$/)
+      );
+
+      if (foundAsset) {
+        apkAsset = foundAsset;
+        latestRelease = release;
+        break; // Use the first (most recent) release with a matching APK
+      }
+    }
+
+    if (!latestRelease) {
+      console.warn(`No release found with matching APK pattern for ${repo}`);
+      return null;
+    }
 
     const sizeUnit = lang === 'en' ? 'MB' : 'МБ';
     const unknownLabel = lang === 'en' ? 'Unknown' : 'Неизвестно';
@@ -53,15 +69,15 @@ export async function fetchLatestRelease(repo: string, lang: string = 'ru'): Pro
     }
 
     return {
-      version: data.tag_name || data.name || 'Latest',
-      url: apkAsset?.browser_download_url || data.html_url || `https://github.com/${repo}/releases/latest`,
+      version: latestRelease.tag_name || latestRelease.name || 'Latest',
+      url: apkAsset?.browser_download_url || latestRelease.html_url || `https://github.com/${repo}/releases/latest`,
       size: sizeStr,
-      publishedAt: data.published_at ? new Date(data.published_at).toLocaleDateString(locale, {
+      publishedAt: latestRelease.published_at ? new Date(latestRelease.published_at).toLocaleDateString(locale, {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
       }) : unknownLabel,
-      changelog: data.body || noDescLabel
+      changelog: latestRelease.body || noDescLabel
     };
   } catch (e) {
     if (e instanceof Error && e.name === 'AbortError') {

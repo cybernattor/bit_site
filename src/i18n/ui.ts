@@ -14,6 +14,8 @@ export const ui = {
     'nav.bithub': 'bit Hub',
     'nav.privacy': 'Политика конфиденциальности',
 
+    'advantages.title': 'Преимущества',
+
     'hero.title': 'bit Tecnologies',
     'hero.tagline': 'Экосистема удобных приложений',
     'hero.subtitle': 'Создаем нативные Android приложения с высокой производительностью и заботой о пользователях. Минимум зависимостей, максимум оптимизации.',
@@ -78,6 +80,8 @@ export const ui = {
     'nav.home': 'Back to Home',
     'nav.bithub': 'bit Hub',
     'nav.privacy': 'Privacy Policy',
+
+    'advantages.title': 'Advantages',
 
     'hero.title': 'bit Tecnologies',
     'hero.tagline': 'Ecosystem of convenient apps',

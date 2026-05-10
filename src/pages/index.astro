@@ -33,24 +33,6 @@ const schema = {
 
 <Layout title={title} description={description} schema={schema}>
 
-  <!-- Redirect snippet for new un-preferenced english users -->
-  <script is:inline>
-    (function () {
-      try {
-        const storedLang = localStorage.getItem('user-lang');
-        if (!storedLang && window.location.pathname === '/') {
-          const browserLang = navigator.language || navigator.userLanguage;
-          const preferredLang = browserLang.toLowerCase().startsWith('en') ? 'en' : 'ru';
-          localStorage.setItem('user-lang', preferredLang);
-          if (preferredLang === 'en') {
-            window.location.replace('/en/');
-          }
-        }
-      } catch (e) {
-        // Fallback: do nothing if localStorage is not available
-      }
-    })();
-  </script>
 
 	<!-- ============================== HERO SECTION ============================== -->
 	<section class="relative overflow-hidden min-h-[90vh] flex items-center mesh-gradient bg-white dark:bg-slate-950 transition-colors duration-500">
@@ -111,7 +93,7 @@ const schema = {
 
 		<div class="container mx-auto px-4">
 			<div class="text-center mb-16 reveal">
-				<span class="inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-wider bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-full mb-4">Преимущества</span>
+				<span class="inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-wider bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-full mb-4" data-i18n="advantages.title">{t('advantages.title')}</span>
 				<h2 class="text-3xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white font-display">
 					Почему <span class="text-gradient">bit Tecnologies</span>?
 				</h2>

@@ -63,7 +63,7 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
   // Dynamic language picker without page reload
   // @ts-nocheck
   let activeMenu = null;
-  let currentLang = 'ru';
+  let currentLang = '{lang}' || 'ru';
 
   // Use global translations from window.translations (set by Layout.astro)
   function getTranslations() {
@@ -76,6 +76,13 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
       // First check if language is already set globally
       if (window.currentLang && translations[window.currentLang]) {
         return window.currentLang;
+      }
+
+      // Check URL for lang query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      if (urlLang && translations[urlLang]) {
+        return urlLang;
       }
 
       const stored = localStorage.getItem('user-lang');
@@ -177,19 +184,14 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
     const search = window.location.search;
     const hash = window.location.hash;
 
-    // Remove existing language prefix
-    const cleanPath = currentPath.replace(/^\/(en|ru)(\/|$)/, '/') || '/';
+    // Create new URL with lang query parameter
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', lang);
 
-    // Add new language prefix if not default
-    let newPath = cleanPath;
-    if (lang !== 'ru') {
-      newPath = `/${lang}${cleanPath}`;
-    }
-
-    const newURL = newPath + search + hash;
+    const newURL = url.pathname + url.search + hash;
 
     // Update URL without reload
-    if (newURL !== window.location.pathname + search + hash) {
+    if (newURL !== window.location.pathname + window.location.search + hash) {
       history.pushState({}, '', newURL);
     }
   }
@@ -230,6 +232,8 @@ const oppositeLang = lang === 'ru' ? 'en' : 'ru';
 
     // Initialize current language
     currentLang = getCurrentLanguage() as 'ru' | 'en';
+    // Update global language variable
+    window.currentLang = currentLang;
     const display = document.getElementById('current-lang-display');
     if (display) display.textContent = currentLang;
 

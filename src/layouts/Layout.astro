@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import favicon from '../../public/favicon.svg';
 import { getLangFromUrl } from '../i18n/utils';
-import { ui } from '../i18n/ui';
+import { ui, defaultLang } from '../i18n/ui';
 
 export interface Props {
 	title: string;
@@ -14,13 +14,19 @@ export interface Props {
 }
 
 const { title, description, image = "/og-bit-hub.svg", schema } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
+// Get language from query parameter or default to Russian
+const urlLang = Astro.url.searchParams.get('lang') || 'ru';
+const lang = urlLang in ui ? urlLang as keyof typeof ui : defaultLang;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'http://localhost:4321');
 
-// Build alternate language URLs
+// Build alternate language URLs with query parameters
 const currentPath = Astro.url.pathname;
-const ruURL = new URL(currentPath.replace(/^\/en\//, '/').replace(/^\/en$/, '/'), Astro.site || 'http://localhost:4321');
-const enURL = new URL(currentPath.startsWith('/en') ? currentPath : `/en${currentPath}`, Astro.site || 'http://localhost:4321');
+const currentSearch = Astro.url.search;
+const hash = Astro.url.hash;
+
+// Create URLs for language switching
+const ruURL = new URL(`${currentPath}?lang=ru${hash}`, Astro.site || 'http://localhost:4321');
+const enURL = new URL(`${currentPath}?lang=en${hash}`, Astro.site || 'http://localhost:4321');
 
 const defaultSchema = {
 	"@context": "https://schema.org",

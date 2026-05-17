@@ -127,7 +127,7 @@ const storedLang = localStorage.getItem('user-lang') as Language;
 **Статус:** ⚠️ ЧАСТИЧНО РЕШЕНО (30.04.2026)
 **Описание:** Вызов GitHub API не имеет должной обработки ошибок и механизмов отката.
 ```typescript
-const release = await fetchLatestRelease('cybernattor/bit_hub', lang).catch(() => null);
+const release = await fetchLatestRelease('bit-Tecnologies/bit_hub', lang).catch(() => null);
 // Тихий сбой может быть неподходящим для пользовательского опыта
 ```
 **Влияние:** Плохой пользовательский опыт при недоступности GitHub API

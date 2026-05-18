@@ -256,7 +256,7 @@ const schema = {
 					<AppCard
 						href={translate('/bit-delta')}
 						name={t('app.bitdelta')}
-						status={{ label: t('app.in_development'), color: "blue" }}
+						status={{ label: "Beta", color: "emerald" }}
 						description={t('app.bitdelta_desc')}
 						requirements="Android 12+"
 						size="~5 МБ"
@@ -280,6 +280,38 @@ const schema = {
 					>
 						<svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
 							<path d="M17,10.5V7A1,1 0 0,0 16,6H4A1,1 0 0,0 3,7V17A1,1 0 0,0 4,18H16A1,1 0 0,0 17,17V13.5L21,17.5V6.5L17,10.5Z"/>
+						</svg>
+					</AppCard>
+				</div>
+
+				<div class="reveal stagger-4">
+					<AppCard
+						href={translate('/bit-together')}
+						name={t('app.bittogether')}
+						status={{ label: t('app.in_development'), color: "blue" }}
+						description={t('app.bittogether_desc')}
+						requirements="Android 10+"
+						size="TBA"
+						iconBgColor="from-cyan-500 to-blue-500"
+					>
+						<svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M16,11C17.66,11 18.99,9.66 18.99,8C18.99,6.34 17.66,5 16,5C14.34,5 13,6.34 13,8C13,9.66 14.34,11 16,11M8,11C9.66,11 10.99,9.66 10.99,8C10.99,6.34 9.66,5 8,5C6.34,5 5,6.34 5,8C5,9.66 6.34,11 8,11M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M16,13C15.71,13 15.38,13.02 15.03,13.05C16.19,13.89 17,15.02 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13Z"/>
+						</svg>
+					</AppCard>
+				</div>
+
+				<div class="reveal stagger-5">
+					<AppCard
+						href={translate('/bit-launcher')}
+						name={t('app.bitlauncher')}
+						status={{ label: t('app.in_development'), color: "blue" }}
+						description={t('app.bitlauncher_desc')}
+						requirements="Android 10+"
+						size="TBA"
+						iconBgColor="from-sky-500 to-emerald-500"
+					>
+						<svg slot="icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12,2A5,5 0 0,0 7,7C7,8.76 7.91,10.31 9.28,11.2C8.47,12.73 8,14.69 8,17H10C10,14.83 10.45,13.04 11.2,11.79C11.46,11.92 11.73,12 12,12C12.27,12 12.54,11.92 12.8,11.79C13.55,13.04 14,14.83 14,17H16C16,14.69 15.53,12.73 14.72,11.2C16.09,10.31 17,8.76 17,7A5,5 0 0,0 12,2M12,4A3,3 0 0,1 15,7A3,3 0 0,1 12,10A3,3 0 0,1 9,7A3,3 0 0,1 12,4M6,18L4,22H8L10,18H6M14,18L16,22H20L18,18H14Z"/>
 						</svg>
 					</AppCard>
 				</div>

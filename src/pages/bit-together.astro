@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+
+const title = 'bit Together — Совместная работа в bit-экосистеме';
+const description = 'bit Together — приложение для совместной работы, обмена и координации внутри bit-экосистемы.';
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "SoftwareApplication",
+	"name": "bit Together",
+	"operatingSystem": "Android",
+	"applicationCategory": "ProductivityApplication",
+	"offers": {
+		"@type": "Offer",
+		"price": "0",
+		"priceCurrency": "USD"
+	}
+};
+---
+
+<Layout title={title} description={description} schema={schema}>
+	<section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
+		<div class="container mx-auto px-4 py-16 md:py-24">
+			<div class="max-w-4xl mx-auto z-10 relative">
+				<div class="text-center mb-12">
+					<div class="w-24 h-24 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center mx-auto mb-6 drop-shadow-md">
+						<svg class="w-12 h-12 text-white drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M16,11C17.66,11 18.99,9.66 18.99,8C18.99,6.34 17.66,5 16,5C14.34,5 13,6.34 13,8C13,9.66 14.34,11 16,11M8,11C9.66,11 10.99,9.66 10.99,8C10.99,6.34 9.66,5 8,5C6.34,5 5,6.34 5,8C5,9.66 6.34,11 8,11M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M16,13C15.71,13 15.38,13.02 15.03,13.05C16.19,13.89 17,15.02 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13Z"/>
+						</svg>
+					</div>
+					<h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-500 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent font-display drop-shadow-sm">
+						bit Together
+					</h1>
+					<p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-4 font-light transition-colors">
+						Совместная работа, обмен и координация внутри bit-экосистемы
+					</p>
+					<div class="flex items-center justify-center space-x-4 mb-6 transition-colors">
+						<span class="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-400 text-sm rounded-full">В разработке</span>
+						<span class="text-slate-400 dark:text-slate-500">•</span>
+						<span class="text-slate-600 dark:text-slate-400">Android 10+</span>
+						<span class="text-slate-400 dark:text-slate-500">•</span>
+						<span class="text-slate-600 dark:text-slate-400">TBA</span>
+					</div>
+					<div class="inline-flex items-center space-x-2 px-8 py-4 border border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 font-semibold rounded-lg cursor-not-allowed transition-colors bg-white/50 dark:bg-transparent backdrop-blur-sm">
+						<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M18,16V12A6,6 0 0,0 12,6A6,6 0 0,0 6,12V16H4V18H20V16H18M12,22A2,2 0 0,0 14,20H10A2,2 0 0,0 12,22Z"/>
+						</svg>
+						<span>Скоро будет доступно</span>
+					</div>
+				</div>
+
+				<div class="glass-effect rounded-xl p-8 mb-8 bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 backdrop-blur-md shadow-xl transition-colors">
+					<h2 class="text-2xl font-bold mb-6 text-slate-900 dark:text-white text-center font-display transition-colors">Что планируем</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<FeatureCard title="Общие пространства" iconColor="text-cyan-600 dark:text-cyan-400" description="Единое место для совместных задач, заметок и рабочих материалов.">
+							<svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24"><path d="M10,4H14V8H10V4M4,10H8V14H4V10M10,10H14V14H10V10M16,10H20V14H16V10M10,16H14V20H10V16Z"/></svg>
+						</FeatureCard>
+						<FeatureCard title="Быстрый обмен" iconColor="text-cyan-600 dark:text-cyan-400" description="Передача данных и ссылок между пользователями и приложениями bit без лишних шагов.">
+							<svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24"><path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.86L8.91,12.71C8.96,12.48 9,12.24 9,12C9,11.76 8.96,11.52 8.91,11.29L15.96,7.18C16.5,7.68 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.48 15.09,5.71L8.04,9.82C7.5,9.32 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.68 8.04,14.18L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19A2.92,2.92 0 0,0 18,21.92A2.92,2.92 0 0,0 20.92,19A2.92,2.92 0 0,0 18,16.08Z"/></svg>
+						</FeatureCard>
+						<FeatureCard title="Приватность по умолчанию" iconColor="text-cyan-600 dark:text-cyan-400" description="Без рекламы, скрытой аналитики и лишнего сбора данных.">
+							<svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z"/></svg>
+						</FeatureCard>
+						<FeatureCard title="Нативный Android" iconColor="text-cyan-600 dark:text-cyan-400" description="Легкий интерфейс и быстрая работа на устройствах разных классов.">
+							<svg slot="icon" class="w-full h-full" fill="currentColor" viewBox="0 0 24 24"><path d="M17,1H7A2,2 0 0,0 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3A2,2 0 0,0 17,1M12,22A1,1 0 0,1 11,21A1,1 0 0,1 12,20A1,1 0 0,1 13,21A1,1 0 0,1 12,22Z"/></svg>
+						</FeatureCard>
+					</div>
+				</div>
+
+				<div class="text-center">
+					<Button href="/#apps" variant="outline" class="mr-4">
+						<span>Вернуться к продуктам</span>
+					</Button>
+					<Button href="/bit-hub" variant="outline">
+						<span>bit Hub</span>
+					</Button>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
